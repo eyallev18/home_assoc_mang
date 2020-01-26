@@ -1,0 +1,6 @@
+.hebrew{
+    direction: rtl;
+}
+.ml-auto .mx-auto{
+    margin-right: 0px!important;
+}

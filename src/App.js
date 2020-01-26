@@ -14,12 +14,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeUser: null
+    }
+  }
+
   render() {
+    const { activeUser } = this.state;
     return (
 
       <Switch>
         <Route exact path="/">
-          <HomePage />
+          <HomePage activeUser={activeUser} />
         </Route>
         <Route exact path="/login">
           <LoginPage />
