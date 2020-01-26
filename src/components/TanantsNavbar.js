@@ -13,18 +13,18 @@ class TanantsNavbar extends Component {
     render() {
         const { activeUser } = this.props;
 
-        const dashboardLink = activeUser ? <Nav.Link href="#/dashboard">תצוגות</Nav.Link> : null;
-        const tanantsLink = activeUser ? <Nav.Link href="#/tanants">דיירים</Nav.Link> : null;
-        const messagesLink = activeUser ? <Nav.Link href="#/messages">הודעות</Nav.Link> : null;
-        const issuesLink = activeUser ? <Nav.Link href="#/issues">תקלות</Nav.Link> : null;
-        const votingLink = activeUser ? <Nav.Link href="#/voting" >הצבעות</Nav.Link> : null;
-        const signupLink = !activeUser ? <Nav.Link href="#/signup">רישום</Nav.Link> : null;
-        const loginLink = !activeUser ? <Nav.Link href="#/login">כניסה</Nav.Link> : null;
-        const logoutLink = activeUser ? <Nav.Link className="leftlink"  >התנתק</Nav.Link> : null;
+        const dashboardLink = activeUser ? <Nav.Link className="navlink" href="#/dashboard">תצוגות</Nav.Link> : null;
+        const tanantsLink = activeUser ? <Nav.Link className="navlink" href="#/tanants">דיירים</Nav.Link> : null;
+        const messagesLink = activeUser ? <Nav.Link className="navlink" href="#/messages">הודעות</Nav.Link> : null;
+        const issuesLink = activeUser ? <Nav.Link className="navlink" href="#/issues">תקלות</Nav.Link> : null;
+        const votingLink = activeUser ? <Nav.Link className="navlink" href="#/voting" >הצבעות</Nav.Link> : null;
+        const signupLink = !activeUser ? <Nav.Link className="navlink" href="#/signup">רישום</Nav.Link> : null;
+        const loginLink = !activeUser ? <Nav.Link className="navlink" href="#/login">כניסה</Nav.Link> : null;
+        const logoutLink = activeUser ? <Nav.Link className="navlink"  >התנתק</Nav.Link> : null;
         //onClick={this.logout}
         return (
             <Navbar className="hebrew" bg="primary" expand="lg">
-                <Navbar.Brand href="#/">ועד בית</Navbar.Brand>
+                <Navbar.Brand className="navlink" href="#/">ועד בית</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">

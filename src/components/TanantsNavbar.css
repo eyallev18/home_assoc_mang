@@ -1,6 +1,19 @@
 .hebrew{
     direction: rtl;
+    box-sizing: border-box;
+    padding: 0px 16px;
+    background: linear-gradient(to bottom, blue 0%, rgb(0,180,255) 100%)!important;
+    
 }
-.ml-auto .mx-auto{
-    margin-right: 0px!important;
+.navlink{
+    color:white!important;
+    font-weight: bold;
+    
+}
+
+.navlink:hover{
+    height: 100%;
+    color:white;
+    background-color: cadetblue;
+    text-decoration: underline;
 }
