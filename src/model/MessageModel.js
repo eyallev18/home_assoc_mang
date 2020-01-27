@@ -1,7 +1,12 @@
-import IssuesModel from './IssuesModel'
-export default class MessageModel extends IssuesModel {
+export default class MessageModel {
     constructor(messageModel) {
-        super(messageModel.id, messageModel.createdBy, messageModel.createdAt, messageModel.titles, messageModel.details, messageModel.priority, messageModel.comments);
+        this.createdBy = messageModel.get("createdBy");
+        this.createdAt = messageModel.get("createdAt");
+        this.title = messageModel.get("title");
+        this.details = messageModel.get("details");
+        this.priority = messageModel.get("priority");
+        this.comments = messageModel.get("comments");
+
 
     }
 }

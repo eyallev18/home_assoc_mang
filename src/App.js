@@ -19,17 +19,18 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      activeUser: null
+      activeUser: null,
+      committeeUser: null
     }
   }
 
   render() {
-    const { activeUser } = this.state;
+    const { activeUser, committeeUser } = this.state;
     return (
 
       <Switch>
         <Route exact path="/">
-          <HomePage activeUser={activeUser} />
+          <HomePage activeUser={activeUser} committeeUser={committeeUser} />
         </Route>
         <Route exact path="/login">
           <LoginPage />

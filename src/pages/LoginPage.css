@@ -1,0 +1,14 @@
+.p-login > .main {
+    width: 500px;
+    margin: 40px auto;
+    
+}
+.p-login {
+    direction: rtl!important;
+    text-align: right;
+}
+
+.p-login button {
+    font-weight: bold;
+    
+}

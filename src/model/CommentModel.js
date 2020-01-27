@@ -1,7 +1,8 @@
-import IssuesModel from './IssuesModel'
-export default class CommentModel extends IssuesModel {
+export default class CommentModel {
     constructor(commentModel) {
-        super(commentModel.id, commentModel.createdBy, commentModel.createdAt);
+        this.id = issuesModel.id;
+        this.createdBy = commentModel.get("createdBy");
+        this.createdAt = commentModel.get("createdAt");
         this.text = commentModel.get("text");
         this.comments = commentModel.get("comments");
     }
