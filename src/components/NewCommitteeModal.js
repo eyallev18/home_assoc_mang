@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form, Row, Col, Image } from 'react-bootstrap';
-
+import './NewCommitteeModal.css'
 class NewCommitteeModal extends Component {
     constructor(props) {
         super(props);
@@ -48,7 +48,7 @@ class NewCommitteeModal extends Component {
         const { lname, email, pwd, pwdv, apartment } = this.state;
 
         return (
-            <Modal show={show} onHide={handleClose}>
+            <Modal className="align_right" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>רישום חבר ועד</Modal.Title>
                 </Modal.Header>
@@ -87,10 +87,10 @@ class NewCommitteeModal extends Component {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Cancel
+                        בטל
             </Button>
                     <Button variant="success" onClick={this.createCommiteeUser}>
-                        Create
+                        צור
             </Button>
                 </Modal.Footer>
             </Modal>);

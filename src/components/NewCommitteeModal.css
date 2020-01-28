@@ -1,0 +1,7 @@
+.align_right{
+    text-align: right;
+    direction: rtl;
+}
+.modal-header .close{
+    margin-left:2px!important;
+}

@@ -13,7 +13,7 @@ class TanantsNavbar extends Component {
 
         this.state = {
             users: [],
-            showNewCommitteModal: false
+            showNewCommitteeModal: false
         }
         this.handleClose = this.handleClose.bind(this);
         this.handleNewCommitteeUser = this.handleNewCommitteeUser.bind(this);
@@ -22,7 +22,7 @@ class TanantsNavbar extends Component {
     }
     handleClose() {
         this.setState({
-            showNewCommitteModal: false
+            showNewCommitteeModal: false
         })
     }
     handleNewCommitteeUser(newCommiteeUser) {
@@ -46,7 +46,7 @@ class TanantsNavbar extends Component {
         });
     }
     render() {
-        const { showNewCommitteModal } = this.state;
+        const { showNewCommitteeModal } = this.state;
         const { activeUser, committeeUser } = this.props;
 
         const dashboardLink = activeUser ? <Nav.Link className="navlink" href="#/dashboard">תצוגות</Nav.Link> : null;
@@ -86,7 +86,7 @@ class TanantsNavbar extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <NewCommitteeModal show={showNewCommitteModal} handleClose={this.handleClose} handleNewRecipe={this.handleNewCommiteeUser} />
+                <NewCommitteeModal show={showNewCommitteeModal} handleClose={this.handleClose} handleNewCommiteeUser={this.handleNewCommiteeUser} />
             </div>
         );
 
