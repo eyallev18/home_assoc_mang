@@ -25,25 +25,45 @@ class TanantsNavbar extends Component {
             showNewCommitteeModal: false
         })
     }
-    handleNewCommitteeUser(newCommiteeUser) {
-        const Committee = Parse.Object.extend('Committee');
-        const newParseCommittee = new Committee();
+    handleNewCommitteeUser(newCommitteeUser) {
+        //const Committee = Parse.Object.extend('User');
+        const newParseCommittee = new Parse.User();
 
-        newParseCommittee.set('lname', newCommiteeUser.lname);
-        newParseCommittee.set('email', newCommiteeUser.email);
-        newParseCommittee.set('pwd', newCommiteeUser.pwd);
-        newParseCommittee.set('apartment', newCommiteeUser.apartment);
-        newParseCommittee.set('isCommitteeMember', newCommiteeUser.isCommitteeMember);
+        newParseCommittee.set('username', newCommitteeUser.lname);
+        newParseCommittee.set('email', newCommitteeUser.email);
+        newParseCommittee.set('password', newCommitteeUser.pwd);
+        newParseCommittee.set('apartment', newCommitteeUser.apartment);
+        newParseCommittee.set('isCommitteeMember', newCommitteeUser.isCommitteeMember);
 
 
-        newParseCommittee.save().then(theCreatedParseCommittee => {
-            console.log('Committee created', theCreatedParseCommittee);
+        newParseCommittee.signUp().then((newParseCommittee) => {
+            if (typeof document !== 'undefined') document.write(`User signed up: ${JSON.stringify(newParseCommittee)}`);
+            console.log('User signed up', newParseCommittee);
             this.setState({
-                recipes: this.state.users.concat(new TanantsModel(theCreatedParseCommittee))
+                users: this.state.users.concat(new TanantsModel(newParseCommittee))
+
             })
-        }, error => {
-            console.error('Error while creating Committee: ', error);
+        }).catch(error => {
+            if (typeof document !== 'undefined') document.write(`Error while signing up user: ${JSON.stringify(error)}`);
+            console.error('Error while signing up user', error);
         });
+
+
+
+
+        //but now i am that user??!?!
+
+
+
+        //)
+
+
+
+        // .then(theCreatedParseCommittee => {
+        //     console.log('Committee created', theCreatedParseCommittee);
+        //     this.setState({
+        //         users: this.state.users.concat(new TanantsModel(theCreatedParseCommittee))
+        //     })
     }
     render() {
         const { showNewCommitteeModal } = this.state;
@@ -86,7 +106,7 @@ class TanantsNavbar extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <NewCommitteeModal show={showNewCommitteeModal} handleClose={this.handleClose} handleNewCommiteeUser={this.handleNewCommiteeUser} />
+                <NewCommitteeModal show={showNewCommitteeModal} handleClose={this.handleClose} handleNewCommitteeUser={this.handleNewCommitteeUser} />
             </div>
         );
 

@@ -6,17 +6,17 @@ class NewCommitteeModal extends Component {
         super(props);
 
         this.state = {
-            lname: "",
-            email: "",
-            pwd: "",
-            pwdv: "",
-            apartment: "",
+            lname: "אייל",
+            email: "eyal@gmail.com",
+            pwd: "1234",
+            pwdv: "1234",
+            apartment: "55",
             isCommitteeMember: true
 
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.createCommiteeUser = this.createCommiteeUser.bind(this);
+        this.createCommitteeUser = this.createCommitteeUser.bind(this);
     }
 
     handleInputChange(event) {
@@ -29,10 +29,10 @@ class NewCommitteeModal extends Component {
         });
     }
 
-    createCommiteeUser() {
+    createCommitteeUser() {
         const { lname, email, pwd, pwdv, apartment, isCommitteeMember } = this.state;
-        const newCommiteeUser = { lname, email, pwd, pwdv, apartment, isCommitteeMember };
-        this.props.handleNewCommiteeUser(newCommiteeUser);
+        const newCommitteeUser = { lname, email, pwd, apartment, isCommitteeMember };
+        this.props.handleNewCommitteeUser(newCommitteeUser);
         this.props.handleClose();
         this.setState({
             lname: "",
@@ -89,7 +89,7 @@ class NewCommitteeModal extends Component {
                     <Button variant="secondary" onClick={handleClose}>
                         בטל
             </Button>
-                    <Button variant="success" onClick={this.createCommiteeUser}>
+                    <Button variant="success" onClick={this.createCommitteeUser}>
                         צור
             </Button>
                 </Modal.Footer>
