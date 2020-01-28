@@ -13,13 +13,35 @@ class TanantsNavbar extends Component {
 
         this.state = {
             users: [],
-            showNewCommitteeModal: false
+            showNewCommitteeModal: false,
+            isCommitteeMember: false
         }
         this.handleClose = this.handleClose.bind(this);
         this.handleNewCommitteeUser = this.handleNewCommitteeUser.bind(this);
 
 
     }
+    async componentDidMount() {
+        const User = Parse.Object.extend("User")
+        const query = new Parse.Query(User);
+
+        query.equalTo('isCommitteeMember', true)
+        const temp = await query.find();
+        var committeeExist = (temp.length > 0) ? true : false;
+        this.setState({
+            isCommitteeMember: committeeExist
+
+        })
+        // .then((user) => {
+        //     if (typeof document !== 'undefined') document.write(`User found: ${JSON.stringify(user)}`);
+        //     console.log('User found', user);
+        // }, (error) => {
+        //     if (typeof document !== 'undefined') document.write(`Error while fetching user: ${JSON.stringify(error)}`);
+        //     console.error('Error while fetching user', error);
+        // });
+    }
+
+
     handleClose() {
         this.setState({
             showNewCommitteeModal: false
@@ -66,7 +88,7 @@ class TanantsNavbar extends Component {
         //     })
     }
     render() {
-        const { showNewCommitteeModal } = this.state;
+        const { showNewCommitteeModal, isCommitteeMember } = this.state;
         const { activeUser, committeeUser } = this.props;
 
         const dashboardLink = activeUser ? <Nav.Link className="navlink" href="#/dashboard">תצוגות</Nav.Link> : null;
@@ -74,8 +96,8 @@ class TanantsNavbar extends Component {
         const messagesLink = activeUser ? <Nav.Link className="navlink" href="#/messages">הודעות</Nav.Link> : null;
         const issuesLink = activeUser ? <Nav.Link className="navlink" href="#/issues">תקלות</Nav.Link> : null;
         const votingLink = activeUser ? <Nav.Link className="navlink" href="#/voting" >הצבעות</Nav.Link> : null;
-        const signupLink = !activeUser && !committeeUser ? <Nav.Link className="navlink" onClick={() => { this.setState({ showNewCommitteeModal: true }) }} > רישום ועד בית</Nav.Link> : null;
-        const loginLink = !activeUser && committeeUser ? <Nav.Link className="navlink" href="#/login"> כניסת דיירים או ועד בית</Nav.Link> : null;
+        const signupLink = !activeUser && !isCommitteeMember ? <Nav.Link className="navlink" onClick={() => { this.setState({ showNewCommitteeModal: true }) }} > רישום ועד בית</Nav.Link> : null;
+        const loginLink = !activeUser && isCommitteeMember ? <Nav.Link className="navlink" href="#/login"> כניסת דיירים או ועד בית</Nav.Link> : null;
         const logoutLink = activeUser ? <Nav.Link className="navlink"  >התנתק</Nav.Link> : null;
         //onClick={this.logout}
         return (
