@@ -14,19 +14,43 @@ class TanantsNavbar extends Component {
         this.state = {
             users: [],
             showNewCommitteeModal: false,
-            isCommitteeMember: false
+            isCommitteeMember: false,
+            activeUser: this.props.activeUser,
+            committeeUser: this.props.committeeUser
         }
         this.handleClose = this.handleClose.bind(this);
         this.handleNewCommitteeUser = this.handleNewCommitteeUser.bind(this);
+        this.handeLogout = this.handeLogout.bind(this);
 
 
     }
+    handeLogout() {
+        if (Parse.User.current()) {
+            Parse.User.logOut();
+        }
+        this.setState({
+            activeUser: null
+        })
+    }
     async componentDidMount() {
+
+
+
+
+
+
+
         const User = Parse.Object.extend("User")
         const query = new Parse.Query(User);
+        //alert(Parse.User.current());
 
         query.equalTo('isCommitteeMember', true)
         const temp = await query.find();
+        for (let i = 0; i < temp.length; i++) {
+            query.equalTo("objectId", temp[i].id)
+            const alluesrs = await query.find();
+
+        }
         var committeeExist = (temp.length > 0) ? true : false;
         this.setState({
             isCommitteeMember: committeeExist
@@ -73,6 +97,8 @@ class TanantsNavbar extends Component {
 
 
 
+
+
         //but now i am that user??!?!
 
 
@@ -98,8 +124,8 @@ class TanantsNavbar extends Component {
         const votingLink = activeUser ? <Nav.Link className="navlink" href="#/voting" >הצבעות</Nav.Link> : null;
         const signupLink = !activeUser && !isCommitteeMember ? <Nav.Link className="navlink" onClick={() => { this.setState({ showNewCommitteeModal: true }) }} > רישום ועד בית</Nav.Link> : null;
         const loginLink = !activeUser && isCommitteeMember ? <Nav.Link className="navlink" href="#/login"> כניסת דיירים או ועד בית</Nav.Link> : null;
-        const logoutLink = activeUser ? <Nav.Link className="navlink"  >התנתק</Nav.Link> : null;
-        //onClick={this.logout}
+        const logoutLink = activeUser ? <Nav.Link className="navlink" href="#/" onClick={this.handeLogout} >התנתק</Nav.Link> : null;
+
         return (
             <div>
                 <Navbar className="hebrew" bg="primary" expand="lg">
@@ -128,7 +154,7 @@ class TanantsNavbar extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <NewCommitteeModal show={showNewCommitteeModal} handleClose={this.handleClose} handleNewCommitteeUser={this.handleNewCommitteeUser} />
+                <NewCommitteeModal activeUser={activeUser} committeeUser={committeeUser} show={showNewCommitteeModal} handleClose={this.handleClose} handleNewCommitteeUser={this.handleNewCommitteeUser} />
             </div>
         );
 

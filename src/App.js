@@ -10,6 +10,7 @@ import MessagesPage from './pages/MessagesPage';
 import IssuesPage from './pages/IssuesPage';
 import VotingPage from './pages/VotingPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Parse from 'parse'
 
 import './App.css';
 
@@ -22,7 +23,18 @@ class App extends React.Component {
       activeUser: null,
       committeeUser: null
     }
+    //this.handeLogout = this.handeLogout.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+
   }
+
+  handleLogin(user) {
+    this.setState({
+      activeUser: user
+    });
+  }
+
+
 
   render() {
     const { activeUser, committeeUser } = this.state;
@@ -30,10 +42,10 @@ class App extends React.Component {
 
       <Switch>
         <Route exact path="/">
-          <HomePage activeUser={activeUser} committeeUser={committeeUser} />
+          <HomePage activeUser={activeUser} committeeUser={committeeUser} handeLogout={this.handeLogout} />
         </Route>
         <Route exact path="/login">
-          <LoginPage />
+          <LoginPage handleLogin={this.handleLogin} />
         </Route>
         <Route exact path="/dashboard">
           <DashboardPage />

@@ -13,12 +13,14 @@ class LoginPage extends Component {
             email: "",
             pwd: "",
             apartment: "",
-            isCommitteeMember: false
+            isCommitteeMember: false,
+            showInvalidLoginError: false,
+            redirectToDashBoardPage: false
 
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
-        //   this.login = this.login.bind(this);
+        this.login = this.login.bind(this);
 
     }
     handleInputChange(event) {
@@ -31,8 +33,38 @@ class LoginPage extends Component {
         });
     }
 
+    login() {
+        const { handleLogin } = this.props;
+        const { lname, pwd } = this.state;
+        Parse.User.logIn(lname, pwd).then((user) => {
+            // Do stuff after successful login
+            if (typeof document !== 'undefined')
+                //document.write(`Logged in user: ${JSON.stringify(user)}`);
+                console.log('Logged in user', user);
+            // 1) Updating App component on the new active user
+            handleLogin(user);
+            // 2) navigate to recipes page
+            this.setState({
+                redirectToDashBoardPage: true
+            });
+
+        }).catch(error => {
+            if (typeof document !== 'undefined') document.write(`Error while logging in user: ${JSON.stringify(error)}`);
+            console.error('Error while logging in user', error);
+            this.setState({
+                showInvalidLoginError: true
+            });
+        })
+
+
+    }
+
     render() {
-        const { lname, email, pwd, apartment, showInvalidLoginError } = this.state;
+        const { lname, email, pwd, apartment, showInvalidLoginError, redirectToDashBoardPage } = this.state;
+        if (redirectToDashBoardPage) {
+            return <Redirect to="/dashboard" />
+        }
+
 
         const errorAlert = showInvalidLoginError ? <Alert variant="danger">Invalid email or password!</Alert> : null;
         return (

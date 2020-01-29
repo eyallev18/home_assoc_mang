@@ -6,11 +6,11 @@ class NewCommitteeModal extends Component {
         super(props);
 
         this.state = {
-            lname: "אייל",
-            email: "eyal@gmail.com",
-            pwd: "1234",
-            pwdv: "1234",
-            apartment: "55",
+            lname: "",
+            email: "",
+            pwd: "",
+            pwdv: "",
+            apartment: "",
             isCommitteeMember: true
 
         }
@@ -32,7 +32,7 @@ class NewCommitteeModal extends Component {
     createCommitteeUser() {
         const { lname, email, pwd, pwdv, apartment, isCommitteeMember } = this.state;
         const newCommitteeUser = { lname, email, pwd, apartment, isCommitteeMember };
-        this.props.handleNewCommitteeUser(newCommitteeUser);
+        this.props.handleNewCommitteeUser(newCommitteeUser);  // in TanantsNavbar.js
         this.props.handleClose();
         this.setState({
             lname: "",
