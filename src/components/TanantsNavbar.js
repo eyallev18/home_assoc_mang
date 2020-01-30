@@ -15,23 +15,23 @@ class TanantsNavbar extends Component {
             users: [],
             showNewCommitteeModal: false,
             isCommitteeMember: false,
-            activeUser: this.props.activeUser,
+            //activeUser: this.props.activeUser,
             committeeUser: this.props.committeeUser
         }
         this.handleClose = this.handleClose.bind(this);
         this.handleNewCommitteeUser = this.handleNewCommitteeUser.bind(this);
-        this.handeLogout = this.handeLogout.bind(this);
+        // this.handeLogout = this.handeLogout.bind(this);
 
 
     }
-    handeLogout() {
-        if (Parse.User.current()) {
-            Parse.User.logOut();
-        }
-        this.setState({
-            activeUser: null
-        })
-    }
+    // handeLogout() {
+    //     if (Parse.User.current()) {
+    //         Parse.User.logOut();
+    //     }
+    //     this.setState({
+    //         activeUser: null
+    //     })
+    // }
     async componentDidMount() {
 
 
@@ -122,10 +122,11 @@ class TanantsNavbar extends Component {
         const messagesLink = activeUser ? <Nav.Link className="navlink" href="#/messages">הודעות</Nav.Link> : null;
         const issuesLink = activeUser ? <Nav.Link className="navlink" href="#/issues">תקלות</Nav.Link> : null;
         const votingLink = activeUser ? <Nav.Link className="navlink" href="#/voting" >הצבעות</Nav.Link> : null;
-        const signupLink = !activeUser && !isCommitteeMember ? <Nav.Link className="navlink" onClick={() => { this.setState({ showNewCommitteeModal: true }) }} > רישום ועד בית</Nav.Link> : null;
-        const loginLink = !activeUser && isCommitteeMember ? <Nav.Link className="navlink" href="#/login"> כניסת דיירים או ועד בית</Nav.Link> : null;
-        const logoutLink = activeUser ? <Nav.Link className="navlink" href="#/" onClick={this.handeLogout} >התנתק</Nav.Link> : null;
-
+        const signupLink = !activeUser ? <Nav.Link className="navlink" onClick={() => { this.setState({ showNewCommitteeModal: true }) }} > רישום ועד בית</Nav.Link> : null;
+        const loginLink = !activeUser ? <Nav.Link className="navlink" href="#/login"> כניסת דיירים או ועד בית</Nav.Link> : null;
+        const logoutLink = activeUser ? <Nav.Link className="navlink" href="#/" onClick={this.props.handeLogout} >התנתק</Nav.Link> : null;
+        // && !isCommitteeMember
+        // && isCommitteeMember
         return (
             <div>
                 <Navbar className="hebrew" bg="primary" expand="lg">

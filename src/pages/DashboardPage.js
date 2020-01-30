@@ -13,11 +13,12 @@ class DashBoard extends Component {
 
 
     render() {
-        const { activeUser, committeeUser } = this.props;
+        const { activeUser, committeeUser, handeLogout } = this.props;
+
 
         return (
             <div>
-                <TanantsNavbar activeUser={activeUser} committeeUser={committeeUser} handlelogin={this.handlelogin} handeLogout={this.handeLogout} />
+                <TanantsNavbar activeUser={activeUser} committeeUser={committeeUser} handeLogout={handeLogout} />
                 <h1>I'm DashBoard Page</h1>
 
             </div>

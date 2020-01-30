@@ -79,22 +79,22 @@ class LoginPage extends Component {
                             <Form.Control name="lname" value={lname}
                                 type="text" placeholder="הכנס שם משפחה" onChange={this.handleInputChange} />
                         </Form.Group>
-                        <Form.Group controlId="formBasicEmail">
+                        {/* <Form.Group controlId="formBasicEmail">
                             <Form.Label>כתובת אימייל</Form.Label>
                             <Form.Control name="email" value={email}
                                 type="email" placeholder="הכנס כתובת אימייל" onChange={this.handleInputChange} />
-                        </Form.Group>
+                        </Form.Group> */}
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>סיסמא</Form.Label>
                             <Form.Control name="pwd" value={pwd}
                                 type="password" placeholder="סיסמא" onChange={this.handleInputChange} />
                         </Form.Group>
-                        <Form.Group controlId="formBasicPassword">
+                        {/* <Form.Group controlId="formBasicPassword">
                             <Form.Label>מספר דירה</Form.Label>
                             <Form.Control name="apartment" value={apartment}
                                 type="text" placeholder="דירה מספר" onChange={this.handleInputChange} />
-                        </Form.Group>
+                        </Form.Group> */}
                         <Button variant="success" type="button" block onClick={this.login}>
                             היכנס
                     </Button>

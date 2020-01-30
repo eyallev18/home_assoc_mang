@@ -25,6 +25,7 @@ class App extends React.Component {
     }
     //this.handeLogout = this.handeLogout.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.handeLogout = this.handeLogout.bind(this);
 
   }
 
@@ -34,7 +35,14 @@ class App extends React.Component {
     });
   }
 
-
+  handeLogout() {
+    if (Parse.User.current()) {
+      Parse.User.logOut();
+    }
+    this.setState({
+      activeUser: null
+    })
+  }
 
   render() {
     const { activeUser, committeeUser } = this.state;
@@ -48,7 +56,7 @@ class App extends React.Component {
           <LoginPage handleLogin={this.handleLogin} />
         </Route>
         <Route exact path="/dashboard">
-          <DashboardPage />
+          <DashboardPage activeUser={activeUser} handeLogout={this.handeLogout} />
         </Route>
         <Route exact path="/tanants">
           <TanantsPage />
