@@ -51,7 +51,8 @@ class TanantsNavbar extends Component {
         newParseCommittee.set('email', newCommitteeUser.email);
         newParseCommittee.set('apartment', newCommitteeUser.apartment);
         newParseCommittee.set('isCommitteeMember', newCommitteeUser.isCommitteeMember);
-        newParseCommittee.set('community', new Parse.Object("Community"));
+        const newComunity = new Parse.Object("Community");
+        newParseCommittee.set('community', newComunity);
         newParseCommittee.set('password', newCommitteeUser.pwd);
 
 
@@ -59,7 +60,29 @@ class TanantsNavbar extends Component {
         newParseCommittee.signUp().then((newParseCommittee) => {
             // if (typeof document !== 'undefined') document.write(`User signed up: ${JSON.stringify(newParseCommittee)}`);
             console.log('User signed up', newParseCommittee);
-            console.log(newCommitteeUser.id)
+            console.log(newParseCommittee.id)
+
+            const Community = Parse.Object.extend('Community');
+            const query = new Parse.Query(Community);
+            // here you put the objectId that you want to update
+            query.get(newComunity.id).then((object) => {
+                object.set('City', newCommitteeUser.City);
+                object.set('street', newCommitteeUser.street);
+                object.set('building', newCommitteeUser.building);
+                object.save().then((response) => {
+                    // You can use the "get" method to get the value of an attribute
+                    // Ex: response.get("<ATTRIBUTE_NAME>")
+                    // if (typeof document !== 'undefined') document.write(`Updated Community: ${JSON.stringify(response)}`);
+                    console.log('Updated Community', response);
+                }, (error) => {
+                    //  if (typeof document !== 'undefined') document.write(`Error while updating Community: ${JSON.stringify(error)}`);
+                    console.error('Error while updating Community', error);
+                });
+            });
+
+
+
+
             this.setState({
                 users: this.state.users.concat(new TanantsModel(newParseCommittee)),
                 showSignUpModal: true,
@@ -68,6 +91,26 @@ class TanantsNavbar extends Component {
                 colorstyle: greencolor
             })
         }).catch(error => {
+
+            const Community = Parse.Object.extend('Community');
+            const query = new Parse.Query(Community);
+            // here you put the objectId that you want to delete
+            query.get(newComunity.id).then((object) => {
+                object.destroy().then((response) => {
+                    // if (typeof document !== 'undefined') document.write(`Deleted Community: ${JSON.stringify(response)}`);
+                    console.log('Deleted Community', response);
+                }, (error) => {
+                    //   if (typeof document !== 'undefined') document.write(`Error while deleting Community: ${JSON.stringify(error)}`);
+                    console.error('Error while deleting Community', error);
+                });
+            });
+
+
+
+
+
+
+
             // if (typeof document !== 'undefined') document.write(`Error while signing up user: ${JSON.stringify(error)}`);
             console.error('Error while signing up user', error);
             //const errorTranslate = await translate(error, 'he');
@@ -86,7 +129,7 @@ class TanantsNavbar extends Component {
         const { showNewCommitteeModal, showSignUpModal, isCommitteeMember, bodyText, titleText, colorstyle } = this.state;
         const { activeUser, committeeUser } = this.props;
 
-        const dashboardLink = activeUser ? <Nav.Link className="navlink" href="#/dashboard">תצוגות</Nav.Link> : null;
+        const dashboardLink = activeUser ? <Nav.Link className="navlink" href="#/dashboard" >תצוגות</Nav.Link> : null;
         const tanantsLink = activeUser ? <Nav.Link className="navlink" href="#/tanants">דיירים</Nav.Link> : null;
         const messagesLink = activeUser ? <Nav.Link className="navlink" href="#/messages">הודעות</Nav.Link> : null;
         const issuesLink = activeUser ? <Nav.Link className="navlink" href="#/issues">תקלות</Nav.Link> : null;

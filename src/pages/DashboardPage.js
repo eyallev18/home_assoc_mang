@@ -4,6 +4,7 @@ import './DashBoard.css'
 //import { Link, Redirect } from 'react-router-dom';
 import Parse from 'parse'
 import TanantsNavbar from '../components/TanantsNavbar';
+import { Redirect } from 'react-router-dom';
 
 class DashBoard extends Component {
     constructor(props) {
@@ -14,6 +15,10 @@ class DashBoard extends Component {
 
     render() {
         const { activeUser, committeeUser, handeLogout } = this.props;
+        if (!activeUser) {
+            return <Redirect to="/" />
+        }
+
 
 
         return (

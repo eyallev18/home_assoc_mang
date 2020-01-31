@@ -38,7 +38,7 @@ class NewCommitteeModal extends Component {
 
     createCommitteeUser() {
         const { lname, email, pwd, pwdv, apartment, street, building, City, isCommitteeMember } = this.state;
-        const newCommitteeUser = { lname, email, pwd, apartment, isCommitteeMember };
+        const newCommitteeUser = { lname, email, pwd, apartment, isCommitteeMember, City, street, building };
         this.props.handleNewCommitteeUser(newCommitteeUser);  // in TanantsNavbar.js
         // this.props.handleLogin(newCommitteeUser);
         this.props.handleClose();
@@ -71,13 +71,13 @@ class NewCommitteeModal extends Component {
                 <Modal.Body>
                     <Form>
                         <Form.Group>
-                            <Form.Label>שם דייר</Form.Label>
+                            <Form.Label controlId="formGridZip">שם דייר</Form.Label>
                             <Form.Control name="lname" value={lname}
                                 type="text" placeholder="הכנס שם חבר ועד" onChange={this.handleInputChange} />
                         </Form.Group>
 
                         <Form.Group>
-                            <Form.Label>כתובת אימייל</Form.Label>
+                            <Form.Label controlId="formGridZip">כתובת אימייל</Form.Label>
                             <Form.Control name="email" value={email}
                                 type="text" placeholder="הכנס כתובת אימייל" onChange={this.handleInputChange} />
                         </Form.Group>
