@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './TanantsNavbar.css'
 import NewCommitteeModal from '../components/NewCommitteeModal';
+import NewTanantModal from '../components/NewTanantModal';
 import Parse from 'parse'
 import TanantsModel from '../model/TanantsModel'
 import SignUpModal from '../components/SignUpModal';
@@ -18,6 +19,7 @@ class TanantsNavbar extends Component {
         this.state = {
             users: [],
             showNewCommitteeModal: false,
+            showNewTanantModal: false,
             showSignUpModal: false,
             //isCommitteeMember: false,
             //activeUser: this.props.activeUser,
@@ -126,7 +128,7 @@ class TanantsNavbar extends Component {
 
     }
     render() {
-        const { showNewCommitteeModal, showSignUpModal, isCommitteeMember, bodyText, titleText, colorstyle } = this.state;
+        const { showNewCommitteeModal, showNewTanantModal, showSignUpModal, isCommitteeMember, bodyText, titleText, colorstyle } = this.state;
         const { activeUser, isCommitteeUser } = this.props;
 
         const dashboardLink = activeUser ? <Nav.Link className="navlink" href="#/dashboard" >תצוגות</Nav.Link> : null;
@@ -134,7 +136,7 @@ class TanantsNavbar extends Component {
         const messagesLink = activeUser ? <Nav.Link className="navlink" href="#/messages">הודעות</Nav.Link> : null;
         const issuesLink = activeUser ? <Nav.Link className="navlink" href="#/issues">תקלות</Nav.Link> : null;
         const votingLink = activeUser ? <Nav.Link className="navlink" href="#/voting" >הצבעות</Nav.Link> : null;
-        //const adminLink = activeUser && isCommitteeMember ? <Nav.Link className="navlink" href="#/voting" >הצבעות</Nav.Link> : null;
+        const adminLink = activeUser && isCommitteeUser ? <Nav.Link className="navlink" href="#/tanants" >רישום דיירים</Nav.Link> : null;
         const signupLink = !activeUser ? <Nav.Link className="navlink" onClick={() => { this.setState({ showNewCommitteeModal: true }) }} > רישום ועד בית</Nav.Link> : null;
         const loginLink = !activeUser ? <Nav.Link className="navlink" href="#/login"> כניסת דיירים או ועד בית</Nav.Link> : null;
         const logoutLink = activeUser ? <Nav.Link className="navlink" href="#/" onClick={this.props.handeLogout} >התנתק</Nav.Link> : null;
@@ -161,6 +163,9 @@ class TanantsNavbar extends Component {
                         <Nav className="mr-auto">
                             {votingLink}
                         </Nav>
+                        <Nav className="mr-auto">
+                            {adminLink}
+                        </Nav>
                         <Nav >
                             {signupLink}
                             {loginLink}
@@ -168,7 +173,9 @@ class TanantsNavbar extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <NewCommitteeModal activeUser={activeUser} isCommitteeUser={isCommitteeUser} show={showNewCommitteeModal} handleClose={this.handleClose} handleNewCommitteeUser={this.handleNewCommitteeUser} handleLogin={this.handleLogin} />
+                <NewCommitteeModal activeUser={activeUser} isCommitteeUser={isCommitteeUser} show={showNewCommitteeModal} handleClose={this.handleClose} handleNewCommitteeUser={this.handleNewCommitteeUser} />
+                <NewTanantModal activeUser={activeUser} isCommitteeUser={isCommitteeUser} show={showNewTanantModal} handleClose={this.handleClose} handleNewTanantUser={this.handleNewTanantUser} />
+
                 <SignUpModal show={showSignUpModal} handleClose={this.handleClose} titleText={titleText} bodyText={bodyText} colorstyle={colorstyle} />
             </div>
         );
