@@ -47,6 +47,8 @@ class LoginPage extends Component {
             this.setState({
                 redirectToDashBoardPage: true
             });
+            var currentUser = Parse.User.current();
+            console.log(currentUser);
 
         }).catch(error => {
             if (typeof document !== 'undefined') document.write(`Error while logging in user: ${JSON.stringify(error)}`);

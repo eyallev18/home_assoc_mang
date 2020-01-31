@@ -6,6 +6,10 @@ import './TanantsNavbar.css'
 import NewCommitteeModal from '../components/NewCommitteeModal';
 import Parse from 'parse'
 import TanantsModel from '../model/TanantsModel'
+import SignUpModal from '../components/SignUpModal';
+import translate from 'translate';
+
+
 
 class TanantsNavbar extends Component {
     constructor(props) {
@@ -14,107 +18,72 @@ class TanantsNavbar extends Component {
         this.state = {
             users: [],
             showNewCommitteeModal: false,
+            showSignUpModal: false,
             isCommitteeMember: false,
             //activeUser: this.props.activeUser,
-            committeeUser: this.props.committeeUser
+            committeeUser: this.props.committeeUser,
+            redirectToDashBoardPage: false,
+            titleText: "",
+            bodyText: ""
+
         }
         this.handleClose = this.handleClose.bind(this);
         this.handleNewCommitteeUser = this.handleNewCommitteeUser.bind(this);
-        // this.handeLogout = this.handeLogout.bind(this);
-
-
-    }
-    // handeLogout() {
-    //     if (Parse.User.current()) {
-    //         Parse.User.logOut();
-    //     }
-    //     this.setState({
-    //         activeUser: null
-    //     })
-    // }
-    async componentDidMount() {
 
 
 
-
-
-
-
-        const User = Parse.Object.extend("User")
-        const query = new Parse.Query(User);
-        //alert(Parse.User.current());
-
-        query.equalTo('isCommitteeMember', true)
-        const temp = await query.find();
-        for (let i = 0; i < temp.length; i++) {
-            query.equalTo("objectId", temp[i].id)
-            const alluesrs = await query.find();
-
-        }
-        var committeeExist = (temp.length > 0) ? true : false;
-        this.setState({
-            isCommitteeMember: committeeExist
-
-        })
-        // .then((user) => {
-        //     if (typeof document !== 'undefined') document.write(`User found: ${JSON.stringify(user)}`);
-        //     console.log('User found', user);
-        // }, (error) => {
-        //     if (typeof document !== 'undefined') document.write(`Error while fetching user: ${JSON.stringify(error)}`);
-        //     console.error('Error while fetching user', error);
-        // });
     }
 
 
     handleClose() {
         this.setState({
-            showNewCommitteeModal: false
+            showNewCommitteeModal: false,
+            showSignUpModal: false
         })
     }
     handleNewCommitteeUser(newCommitteeUser) {
-        //const Committee = Parse.Object.extend('User');
+        const greencolor = { color: 'green' };
+        const redcolor = { color: 'red' };
+
         const newParseCommittee = new Parse.User();
 
         newParseCommittee.set('username', newCommitteeUser.lname);
         newParseCommittee.set('email', newCommitteeUser.email);
-        newParseCommittee.set('password', newCommitteeUser.pwd);
         newParseCommittee.set('apartment', newCommitteeUser.apartment);
         newParseCommittee.set('isCommitteeMember', newCommitteeUser.isCommitteeMember);
+        newParseCommittee.set('community', new Parse.Object("Community"));
+        newParseCommittee.set('password', newCommitteeUser.pwd);
+
 
 
         newParseCommittee.signUp().then((newParseCommittee) => {
-            if (typeof document !== 'undefined') document.write(`User signed up: ${JSON.stringify(newParseCommittee)}`);
+            // if (typeof document !== 'undefined') document.write(`User signed up: ${JSON.stringify(newParseCommittee)}`);
             console.log('User signed up', newParseCommittee);
+            console.log(newCommitteeUser.id)
             this.setState({
-                users: this.state.users.concat(new TanantsModel(newParseCommittee))
-
+                users: this.state.users.concat(new TanantsModel(newParseCommittee)),
+                showSignUpModal: true,
+                titleText: "רישום חבר ועד בוצע בהצלחה !",
+                bodyText: "בצע כניסה להמשך עבודה",
+                colorstyle: greencolor
             })
         }).catch(error => {
-            if (typeof document !== 'undefined') document.write(`Error while signing up user: ${JSON.stringify(error)}`);
+            // if (typeof document !== 'undefined') document.write(`Error while signing up user: ${JSON.stringify(error)}`);
             console.error('Error while signing up user', error);
+            //const errorTranslate = await translate(error, 'he');
+            this.setState({
+                showSignUpModal: true,
+                titleText: "רישום חבר ועד נכשל ",
+                bodyText: "שם קיים במערכת", //Translate
+                colorstyle: redcolor
+            })
         });
 
 
 
-
-
-
-        //but now i am that user??!?!
-
-
-
-        //)
-
-
-
-        // .then(theCreatedParseCommittee => {
-        //     console.log('Committee created', theCreatedParseCommittee);
-        //     this.setState({
-        //         users: this.state.users.concat(new TanantsModel(theCreatedParseCommittee))
-        //     })
     }
     render() {
-        const { showNewCommitteeModal, isCommitteeMember } = this.state;
+        const { showNewCommitteeModal, showSignUpModal, isCommitteeMember, bodyText, titleText, colorstyle } = this.state;
         const { activeUser, committeeUser } = this.props;
 
         const dashboardLink = activeUser ? <Nav.Link className="navlink" href="#/dashboard">תצוגות</Nav.Link> : null;
@@ -155,7 +124,8 @@ class TanantsNavbar extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <NewCommitteeModal activeUser={activeUser} committeeUser={committeeUser} show={showNewCommitteeModal} handleClose={this.handleClose} handleNewCommitteeUser={this.handleNewCommitteeUser} />
+                <NewCommitteeModal activeUser={activeUser} committeeUser={committeeUser} show={showNewCommitteeModal} handleClose={this.handleClose} handleNewCommitteeUser={this.handleNewCommitteeUser} handleLogin={this.handleLogin} />
+                <SignUpModal show={showSignUpModal} handleClose={this.handleClose} titleText={titleText} bodyText={bodyText} colorstyle={colorstyle} />
             </div>
         );
 

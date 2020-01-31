@@ -33,6 +33,7 @@ class App extends React.Component {
     this.setState({
       activeUser: user
     });
+
   }
 
   handeLogout() {
@@ -50,7 +51,7 @@ class App extends React.Component {
 
       <Switch>
         <Route exact path="/">
-          <HomePage activeUser={activeUser} committeeUser={committeeUser} handeLogout={this.handeLogout} />
+          <HomePage activeUser={activeUser} committeeUser={committeeUser} handeLogout={this.handeLogout} handleLogin={this.handleLogin} />
         </Route>
         <Route exact path="/login">
           <LoginPage handleLogin={this.handleLogin} />

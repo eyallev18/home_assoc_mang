@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form, Row, Col, Image } from 'react-bootstrap';
 import './NewCommitteeModal.css'
+import { Link, Redirect } from 'react-router-dom';
 class NewCommitteeModal extends Component {
     constructor(props) {
         super(props);
@@ -10,11 +11,14 @@ class NewCommitteeModal extends Component {
             email: "",
             pwd: "",
             pwdv: "",
-            town: "",
+            City: "",
             street: "",
             building: "",
             apartment: "",
-            isCommitteeMember: true
+            isCommitteeMember: true,
+            community: null
+
+
 
         }
 
@@ -33,9 +37,10 @@ class NewCommitteeModal extends Component {
     }
 
     createCommitteeUser() {
-        const { lname, email, pwd, pwdv, apartment, street, building, town, isCommitteeMember } = this.state;
+        const { lname, email, pwd, pwdv, apartment, street, building, City, isCommitteeMember } = this.state;
         const newCommitteeUser = { lname, email, pwd, apartment, isCommitteeMember };
         this.props.handleNewCommitteeUser(newCommitteeUser);  // in TanantsNavbar.js
+        // this.props.handleLogin(newCommitteeUser);
         this.props.handleClose();
         this.setState({
             lname: "",
@@ -44,86 +49,20 @@ class NewCommitteeModal extends Component {
             apartment: "",
             street: "",
             building: "",
-            town: "",
-            isCommitteeMember: true
+            City: "",
+            isCommitteeMember: true,
+            community: null
+
         })
     }
 
-    /* <Form>
-      <Form.Row>
-        <Form.Group as={Col} controlId="formGridEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
-        </Form.Group>
-    
-        <Form.Group as={Col} controlId="formGridPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
-        </Form.Group>
-      </Form.Row>
-    
-      <Form.Group controlId="formGridAddress1">
-        <Form.Label>Address</Form.Label>
-        <Form.Control placeholder="1234 Main St" />
-      </Form.Group>
-    
-      <Form.Group controlId="formGridAddress2">
-        <Form.Label>Address 2</Form.Label>
-        <Form.Control placeholder="Apartment, studio, or floor" />
-      </Form.Group>
-    
-      <Form.Row>
-        <Form.Group as={Col} controlId="formGridCity">
-          <Form.Label>City</Form.Label>
-          <Form.Control />
-        </Form.Group>
-    
-        <Form.Group as={Col} controlId="formGridState">
-          <Form.Label>State</Form.Label>
-          <Form.Control as="select">
-            <option>Choose...</option>
-            <option>...</option>
-          </Form.Control>
-        </Form.Group>
-    <Form.Group>
-                                <Form.Label> מספר בית</Form.Label>
-                                <Form.Control name="building" value={building}
-                                    type="text" placeholder="הכנס מספר בית " onChange={this.handleInputChange} />
-                            </Form.Group>
-        <Form.Group as={Col} controlId="formGridZip">
-          <Form.Label>Zip</Form.Label>
-          <Form.Control />
-        </Form.Group>
-      </Form.Row>
-    
-      <Form.Group id="formGridCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-    
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form> */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     render() {
-        const { show, handleClose } = this.props;
-        const { lname, email, pwd, pwdv, apartment, town, street, building } = this.state;
-
+        const { show, handleClose, handleLogin } = this.props;
+        const { lname, email, pwd, pwdv, apartment, City, street, building, redirectToDashBoardPage } = this.state;
+        if (redirectToDashBoardPage) {
+            return <Redirect to="/dashboard" />
+        }
         return (
             <Modal className="align_right" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -158,7 +97,7 @@ class NewCommitteeModal extends Component {
 
                             <Form.Group>
                                 <Form.Label as={Col} controlId="formGridZip">עיר</Form.Label>
-                                <Form.Control name="town" value={town}
+                                <Form.Control name="City" value={City}
                                     type="text" placeholder="הכנס שם עיר" onChange={this.handleInputChange} />
                             </Form.Group>
                             <Form.Group>
