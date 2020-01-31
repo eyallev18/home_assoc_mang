@@ -19,9 +19,9 @@ class TanantsNavbar extends Component {
             users: [],
             showNewCommitteeModal: false,
             showSignUpModal: false,
-            isCommitteeMember: false,
+            //isCommitteeMember: false,
             //activeUser: this.props.activeUser,
-            committeeUser: this.props.committeeUser,
+            committeeUser: false,
             redirectToDashBoardPage: false,
             titleText: "",
             bodyText: ""
@@ -127,13 +127,14 @@ class TanantsNavbar extends Component {
     }
     render() {
         const { showNewCommitteeModal, showSignUpModal, isCommitteeMember, bodyText, titleText, colorstyle } = this.state;
-        const { activeUser, committeeUser } = this.props;
+        const { activeUser, isCommitteeUser } = this.props;
 
         const dashboardLink = activeUser ? <Nav.Link className="navlink" href="#/dashboard" >תצוגות</Nav.Link> : null;
         const tanantsLink = activeUser ? <Nav.Link className="navlink" href="#/tanants">דיירים</Nav.Link> : null;
         const messagesLink = activeUser ? <Nav.Link className="navlink" href="#/messages">הודעות</Nav.Link> : null;
         const issuesLink = activeUser ? <Nav.Link className="navlink" href="#/issues">תקלות</Nav.Link> : null;
         const votingLink = activeUser ? <Nav.Link className="navlink" href="#/voting" >הצבעות</Nav.Link> : null;
+        //const adminLink = activeUser && isCommitteeMember ? <Nav.Link className="navlink" href="#/voting" >הצבעות</Nav.Link> : null;
         const signupLink = !activeUser ? <Nav.Link className="navlink" onClick={() => { this.setState({ showNewCommitteeModal: true }) }} > רישום ועד בית</Nav.Link> : null;
         const loginLink = !activeUser ? <Nav.Link className="navlink" href="#/login"> כניסת דיירים או ועד בית</Nav.Link> : null;
         const logoutLink = activeUser ? <Nav.Link className="navlink" href="#/" onClick={this.props.handeLogout} >התנתק</Nav.Link> : null;
@@ -167,7 +168,7 @@ class TanantsNavbar extends Component {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <NewCommitteeModal activeUser={activeUser} committeeUser={committeeUser} show={showNewCommitteeModal} handleClose={this.handleClose} handleNewCommitteeUser={this.handleNewCommitteeUser} handleLogin={this.handleLogin} />
+                <NewCommitteeModal activeUser={activeUser} isCommitteeUser={isCommitteeUser} show={showNewCommitteeModal} handleClose={this.handleClose} handleNewCommitteeUser={this.handleNewCommitteeUser} handleLogin={this.handleLogin} />
                 <SignUpModal show={showSignUpModal} handleClose={this.handleClose} titleText={titleText} bodyText={bodyText} colorstyle={colorstyle} />
             </div>
         );

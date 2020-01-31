@@ -35,12 +35,12 @@ class HomePage extends Component {
 
     render() {
         //const { activeUser, handleLogout } = this.props;
-        const { activeUser, committeeUser } = this.props;
+        const { activeUser, isCommitteeUser } = this.props;
 
         return (
 
             <div style={{ width: '98%', margin: 'auto' }}>
-                <TanantsNavbar activeUser={activeUser} committeeUser={committeeUser} handlelogin={this.handlelogin} handeLogout={this.handeLogout} />
+                <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handlelogin={this.handlelogin} handeLogout={this.handeLogout} />
                 {/* <RecipeNavbar activeUser={activeUser} handleLogout={handleLogout} />*/}
                 <Carousel customTransition="transform 300ms ease-in-out" swipeable={true} responsive={responsive} stopOnHover={false} arrows={false} showStatus={false} showIndicators={false} showDots={false} showThumbs={false} autoPlay={true} interval="5000" infinite={true} >
                     <div>

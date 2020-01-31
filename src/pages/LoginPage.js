@@ -13,9 +13,9 @@ class LoginPage extends Component {
             email: "",
             pwd: "",
             apartment: "",
-            isCommitteeMember: false,
+            //isCommitteeMember: false,
             showInvalidLoginError: false,
-            redirectToDashBoardPage: false
+            redirectToTanantsPage: false
 
         }
 
@@ -23,6 +23,22 @@ class LoginPage extends Component {
         this.login = this.login.bind(this);
 
     }
+    // async componentDidMount() {
+
+    //     const User = new Parse.User();
+    //     const query = new Parse.Query(User);
+
+    //     query.get(Parse.User.current()).then((user) => {
+    //         // if (typeof document !== 'undefined') document.write(`User found: ${JSON.stringify(user)}`);
+    //         console.log('User found', user);
+    //     }, (error) => {
+    //         if (typeof document !== 'undefined') document.write(`Error while fetching user: ${JSON.stringify(error)}`);
+    //         console.error('Error while fetching user', error);
+    //     });
+
+
+    // }
+
     handleInputChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -34,7 +50,7 @@ class LoginPage extends Component {
     }
 
     login() {
-        const { handleLogin } = this.props;
+        const { handleLogin, isCommitteeUser } = this.props;
         const { lname, pwd } = this.state;
         Parse.User.logIn(lname, pwd).then((user) => {
             // Do stuff after successful login
@@ -43,12 +59,31 @@ class LoginPage extends Component {
                 console.log('Logged in user', user);
             // 1) Updating App component on the new active user
             handleLogin(user);
-            // 2) navigate to recipes page
-            this.setState({
-                redirectToDashBoardPage: true
-            });
             var currentUser = Parse.User.current();
             console.log(currentUser);
+            const User = new Parse.User();
+            const query = new Parse.Query(User);
+
+            query.get(currentUser.id).then((user) => {
+                // if (typeof document !== 'undefined') document.write(`User found: ${JSON.stringify(user)}`);
+                console.log('User found', user.attributes.isCommitteeMember);
+
+            }, (error) => {
+                //  if (typeof document !== 'undefined') document.write(`Error while fetching user: ${JSON.stringify(error)}`);
+                console.error('Error while fetching user', error);
+            });
+            // this.componentDidMount();
+            //console.log(IsCommimittee.length);
+            //  const commiteUser = Parse.Object.extend('User');
+            //  const query = new Parse.Query(commiteUser);
+            //  query.equalTo("isCommitteeMember", true);
+            //   query.find()
+
+            // 2) navigate to recipes page
+            this.setState({
+                redirectToTanantsPage: true
+            });
+
 
         }).catch(error => {
             if (typeof document !== 'undefined') document.write(`Error while logging in user: ${JSON.stringify(error)}`);
@@ -62,9 +97,9 @@ class LoginPage extends Component {
     }
 
     render() {
-        const { lname, email, pwd, apartment, showInvalidLoginError, redirectToDashBoardPage } = this.state;
-        if (redirectToDashBoardPage) {
-            return <Redirect to="/dashboard" />
+        const { lname, email, pwd, apartment, showInvalidLoginError, redirectToTanantsPage } = this.state;
+        if (redirectToTanantsPage) {
+            return <Redirect to="/tanants" />
         }
 
 

@@ -21,7 +21,8 @@ class App extends React.Component {
 
     this.state = {
       activeUser: null,
-      committeeUser: null
+      committeeUser: null,
+      isCommitteeUser: false
     }
     //this.handeLogout = this.handeLogout.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -31,7 +32,8 @@ class App extends React.Component {
 
   handleLogin(user) {
     this.setState({
-      activeUser: user
+      activeUser: user,
+      isCommitteeUser: user.attributes.isCommitteeMember
     });
 
   }
@@ -41,26 +43,27 @@ class App extends React.Component {
       Parse.User.logOut();
     }
     this.setState({
-      activeUser: null
+      activeUser: null,
+      isCommitteeUser: false
     })
   }
 
   render() {
-    const { activeUser, committeeUser } = this.state;
+    const { activeUser, committeeUser, isCommitteeUser } = this.state;
     return (
 
       <Switch>
         <Route exact path="/">
-          <HomePage activeUser={activeUser} committeeUser={committeeUser} handeLogout={this.handeLogout} handleLogin={this.handleLogin} />
+          <HomePage activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={this.handeLogout} handleLogin={this.handleLogin} />
         </Route>
         <Route exact path="/login">
-          <LoginPage handleLogin={this.handleLogin} />
+          <LoginPage handleLogin={this.handleLogin} isCommitteeUser={isCommitteeUser} />
         </Route>
         <Route exact path="/dashboard">
           <DashboardPage activeUser={activeUser} handeLogout={this.handeLogout} />
         </Route>
         <Route exact path="/tanants">
-          <TanantsPage />
+          <TanantsPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} />
         </Route>
         <Route exact path="/messages">
           <MessagesPage />
