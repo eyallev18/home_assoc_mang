@@ -28,11 +28,25 @@
     background-color: cadetblue;
     text-decoration: underline;
 }
-.nav-link:hover{
+.nav-link:not(.different):hover{
     height: 100%;
     color:white!important;
     background-color: cadetblue;
     text-decoration: underline;
 
 }
+.diffcolor{
+    background-color: cadetblue;
+    font-weight: bold;
 
+}
+
+.diffcolor:hover{
+ color: blue;
+ text-decoration: underline;
+ font-weight: bold;
+
+}
+.diffcolor:focus:not(){
+    display: hidden;
+}

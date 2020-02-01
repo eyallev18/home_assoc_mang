@@ -40,7 +40,8 @@ class TanantsNavbar extends Component {
     handleClose() {
         this.setState({
             showNewCommitteeModal: false,
-            showSignUpModal: false
+            showSignUpModal: false,
+            showNewTanantModal: false
         })
     }
     handleNewCommitteeUser(newCommitteeUser) {
@@ -138,7 +139,7 @@ class TanantsNavbar extends Component {
         const votingLink = activeUser ? <Nav.Link className="navlink" href="#/voting" >הצבעות</Nav.Link> : null;
 
         const adminLink = activeUser && isCommitteeUser ? <NavDropdown title="ניהול ועד בית" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/1.1" className="diffcolor">רישום דיירים</NavDropdown.Item>
+            <NavDropdown.Item className="diffcolor" onClick={() => { this.setState({ showNewTanantModal: true }) }}>רישום דיירים</NavDropdown.Item>
             <NavDropdown.Item href="#action/1.2" className="diffcolor">עריכת רשימת דיירים</NavDropdown.Item>
             <NavDropdown.Item href="#action/1.3" className="diffcolor">מחיקת דיירים</NavDropdown.Item>
             <NavDropdown.Item href="#action/1.4" className="diffcolor">החלף ועד</NavDropdown.Item>
