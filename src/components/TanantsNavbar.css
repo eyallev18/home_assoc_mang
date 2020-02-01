@@ -5,15 +5,34 @@
     background: linear-gradient(to bottom, blue 0%, rgb(0,180,255) 100%)!important;
     
 }
-.navlink{
+.navlink,.nav-link {
     color:white!important;
     font-weight: bold;
+    flex-wrap: nowrap;
+
     
 }
+.different{
+    color: rgb(150,150,150)!important;
+    font-weight: bold;
+    margin-right: 200px!important;
+}
 
-.navlink:hover{
+.different:hover {
+    height: 100%; 
+    text-decoration: underline;
+}
+.navlink:not(.different):hover{
     height: 100%;
-    color:white;
+    color:white!important;
     background-color: cadetblue;
     text-decoration: underline;
 }
+.nav-link:hover{
+    height: 100%;
+    color:white!important;
+    background-color: cadetblue;
+    text-decoration: underline;
+
+}
+

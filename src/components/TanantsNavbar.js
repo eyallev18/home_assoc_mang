@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './TanantsNavbar.css'
@@ -136,8 +136,15 @@ class TanantsNavbar extends Component {
         const messagesLink = activeUser ? <Nav.Link className="navlink" href="#/messages">הודעות</Nav.Link> : null;
         const issuesLink = activeUser ? <Nav.Link className="navlink" href="#/issues">תקלות</Nav.Link> : null;
         const votingLink = activeUser ? <Nav.Link className="navlink" href="#/voting" >הצבעות</Nav.Link> : null;
-        const adminLink = activeUser && isCommitteeUser ? <Nav.Link className="navlink" href="#/tanants" >רישום דיירים</Nav.Link> : null;
-        const signupLink = !activeUser ? <Nav.Link className="navlink" onClick={() => { this.setState({ showNewCommitteeModal: true }) }} > רישום ועד בית</Nav.Link> : null;
+
+        const adminLink = activeUser && isCommitteeUser ? <NavDropdown title="ניהול ועד בית" id="basic-nav-dropdown">
+            <NavDropdown.Item href="#action/1.1" className="diffcolor">רישום דיירים</NavDropdown.Item>
+            <NavDropdown.Item href="#action/1.2" className="diffcolor">עריכת רשימת דיירים</NavDropdown.Item>
+            <NavDropdown.Item href="#action/1.3" className="diffcolor">מחיקת דיירים</NavDropdown.Item>
+            <NavDropdown.Item href="#action/1.4" className="diffcolor">החלף ועד</NavDropdown.Item>
+        </NavDropdown> : null;
+
+        const signupLink = !activeUser ? <Nav.Link className="navlink different" onClick={() => { this.setState({ showNewCommitteeModal: true }) }} > רישום ועד בית חדש (מבוצע בפעם הראשונה ע"י ועד הבית ) </Nav.Link> : null;
         const loginLink = !activeUser ? <Nav.Link className="navlink" href="#/login"> כניסת דיירים או ועד בית</Nav.Link> : null;
         const logoutLink = activeUser ? <Nav.Link className="navlink" href="#/" onClick={this.props.handeLogout} >התנתק</Nav.Link> : null;
         // && !isCommitteeMember
@@ -148,7 +155,9 @@ class TanantsNavbar extends Component {
                     <Navbar.Brand className="navlink" href="#/">ועד בית</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
+
                         <Nav className="mr-auto">
+                            {adminLink}
                             {dashboardLink}
                         </Nav>
                         <Nav className="mr-auto">
@@ -164,11 +173,12 @@ class TanantsNavbar extends Component {
                             {votingLink}
                         </Nav>
                         <Nav className="mr-auto">
-                            {adminLink}
-                        </Nav>
-                        <Nav >
-                            {signupLink}
+
                             {loginLink}
+                        </Nav>
+                        <Nav className="ml-auto" >
+                            {signupLink}
+
                             {logoutLink}
                         </Nav>
                     </Navbar.Collapse>
