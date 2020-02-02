@@ -1,0 +1,12 @@
+.align_right{
+    text-align: right;
+    direction: rtl;
+    height: 100vh!important;
+}
+input[type=radio] {
+    margin-right: -20px;
+
+}
+Button {
+    direction: rtl;
+}
