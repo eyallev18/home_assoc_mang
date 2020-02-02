@@ -31,6 +31,7 @@ class TanantsNavbar extends Component {
         }
         this.handleClose = this.handleClose.bind(this);
         this.handleNewCommitteeUser = this.handleNewCommitteeUser.bind(this);
+        this.handleNewTanantUser = this.handleNewTanantUser.bind(this);
 
 
 
@@ -44,6 +45,117 @@ class TanantsNavbar extends Component {
             showNewTanantModal: false
         })
     }
+
+
+    //     var user = new Parse.User();
+    // user.set("username", t_username.value);
+    // user.set("password", t_password.value);
+
+    // var sessionToken = Parse.User.current().get("sessionToken");
+    // //at this point the "teacher" is the current user
+    // //i save this user session for use later
+    // user.signUp(null, {
+    //     success: function (user) {
+    //         //right now i have successfully signed up a new "student" and am actually logged in as that student
+    //         Parse.User.become(sessionToken).then(function (user) {
+    //             // The current user is now set back to the teacher.
+    //             // Continue doing what you want
+    //         }, function (error) {
+    //             // The token could not be validated.
+    //             alert('error');
+    //         });
+    //     },
+    //     error: function (user, error) {
+    //         // Show the error message somewhere and let the user try again                    alert("Error: " + error.code + " " + error.message);
+    //     }
+    // });
+    //       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    handleNewTanantUser(newTanantUser) {
+
+        const greencolor = { color: 'green' };
+        const redcolor = { color: 'red' };
+
+        const newParseCommittee = new Parse.User();
+
+        newParseCommittee.set('username', newTanantUser.lname);
+        newParseCommittee.set('email', newTanantUser.email);
+        newParseCommittee.set('apartment', newTanantUser.apartment);
+        newParseCommittee.set('isCommitteeMember', newTanantUser.isCommitteeMember);
+
+        //const newComunity = new Parse.Object("Community");
+        newParseCommittee.set('community', this.props.activeUser.attributes.community);
+        newParseCommittee.set('password', newTanantUser.pwd);
+
+        const sessionToken = Parse.User.current().get("sessionToken");
+
+        newParseCommittee.signUp().then((newParseCommittee) => {
+            console.log(Parse.User.current());
+            // if (typeof document !== 'undefined') document.write(`User signed up: ${JSON.stringify(newParseCommittee)}`);
+            Parse.User.become(sessionToken).then(function (user) {
+                // The current user is now set back to the teacher.
+                // Continue doing what you want
+                console.log(Parse.User.current());
+            }, function (error) {
+                // The token could not be validated.
+                alert('error');
+            });
+            console.log('User signed up', newParseCommittee);
+            console.log(newParseCommittee.id)
+
+            const tanantDetails = " העבר לדייר: " + newTanantUser.lname + "  אימייל: " + newTanantUser.email + "   סיסמא: " + newTanantUser.pwd;
+
+
+
+            this.setState({
+                users: this.state.users.concat(new TanantsModel(newParseCommittee)),
+                showSignUpModal: true,
+                titleText: "רישום דייר בוצע בהצלחה !",
+                bodyText: tanantDetails,
+                colorstyle: greencolor
+            })
+        }).catch(error => {
+
+
+
+
+
+
+
+
+
+            // if (typeof document !== 'undefined') document.write(`Error while signing up user: ${JSON.stringify(error)}`);
+            console.error('Error while signing up user', error);
+            //const errorTranslate = await translate(error, 'he');
+            this.setState({
+                showSignUpModal: true,
+                titleText: "רישום דייר נכשל ",
+                bodyText: "שם קיים במערכת", //Translate
+                colorstyle: redcolor
+            })
+        });
+
+
+
+    }
+
+
+
+    //end of Tanant registeration
+
     handleNewCommitteeUser(newCommitteeUser) {
         const greencolor = { color: 'green' };
         const redcolor = { color: 'red' };

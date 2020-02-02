@@ -35,7 +35,7 @@ class NewTanantModal extends Component {
     createTanantUser() {
         const { lname, email, pwd, apartment, isCommitteeMember } = this.state;
         const newTanantUser = { lname, email, pwd, apartment, isCommitteeMember };
-        this.props.handleTanantUser(newTanantUser);  // in TanantsNavbar.js
+        this.props.handleNewTanantUser(newTanantUser);  // in TanantsNavbar.js
         // this.props.handleLogin(newCommitteeUser);
         this.props.handleClose();
         this.setState({
