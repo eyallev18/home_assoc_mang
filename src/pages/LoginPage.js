@@ -122,7 +122,7 @@ class LoginPage extends Component {
                                 type="email" placeholder="הכנס כתובת אימייל" onChange={this.handleInputChange} />
                         </Form.Group> */}
 
-                        <Form.Group controlId="formBasicPassword">
+                        <Form.Group controlId="formBasicPassword1">
                             <Form.Label>סיסמא</Form.Label>
                             <Form.Control name="pwd" value={pwd}
                                 type="password" placeholder="סיסמא" onChange={this.handleInputChange} />

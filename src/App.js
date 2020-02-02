@@ -66,13 +66,13 @@ class App extends React.Component {
           <TanantsPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} />
         </Route>
         <Route exact path="/messages">
-          <MessagesPage />
+          <MessagesPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} /> />
         </Route>
         <Route exact path="/issues">
-          <IssuesPage />
+          <IssuesPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} /> />
         </Route>
         <Route exact path="/voting">
-          <VotingPage />
+          <VotingPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} /> />
         </Route>
 
 

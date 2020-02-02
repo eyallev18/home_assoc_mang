@@ -62,19 +62,19 @@ class NewTanantModal extends Component {
                 <Modal.Body>
                     <Form>
                         <Form.Group>
-                            <Form.Label controlId="formGridZip">שם דייר</Form.Label>
+                            <Form.Label controlId="formGridZip9">שם דייר</Form.Label>
                             <Form.Control name="lname" value={lname}
                                 type="text" placeholder="הכנס שם דייר " onChange={this.handleInputChange} />
                         </Form.Group>
 
                         <Form.Group>
-                            <Form.Label controlId="formGridZip">כתובת אימייל</Form.Label>
+                            <Form.Label controlId="formGridZip10">כתובת אימייל</Form.Label>
                             <Form.Control name="email" value={email}
                                 type="text" placeholder="הכנס כתובת אימייל" onChange={this.handleInputChange} />
                         </Form.Group>
 
                         <Form.Group>
-                            <Form.Label controlId="formGridZip">סיסמא </Form.Label>
+                            <Form.Label controlId="formGridZip11">סיסמא </Form.Label>
                             <Form.Control name="pwd" value={pwd}
                                 type="password" placeholder="הכנס סיסמא " onChange={this.handleInputChange} />
                         </Form.Group>
@@ -82,7 +82,7 @@ class NewTanantModal extends Component {
 
 
                         <Form.Group>
-                            <Form.Label controlId="formGridZip"> מספר דירה</Form.Label>
+                            <Form.Label controlId="formGridZip12"> מספר דירה</Form.Label>
                             <Form.Control name="apartment" value={apartment}
                                 type="text" placeholder="הכנס מספר  דירה " onChange={this.handleInputChange} />
                         </Form.Group>

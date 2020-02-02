@@ -26,7 +26,10 @@ class TanantsNavbar extends Component {
             committeeUser: false,
             redirectToDashBoardPage: false,
             titleText: "",
-            bodyText: ""
+            bodyText1: "",
+            bodyText2: "",
+            bodyText3: "",
+            bodyText4: ""
 
         }
         this.handleClose = this.handleClose.bind(this);
@@ -47,29 +50,6 @@ class TanantsNavbar extends Component {
     }
 
 
-    //     var user = new Parse.User();
-    // user.set("username", t_username.value);
-    // user.set("password", t_password.value);
-
-    // var sessionToken = Parse.User.current().get("sessionToken");
-    // //at this point the "teacher" is the current user
-    // //i save this user session for use later
-    // user.signUp(null, {
-    //     success: function (user) {
-    //         //right now i have successfully signed up a new "student" and am actually logged in as that student
-    //         Parse.User.become(sessionToken).then(function (user) {
-    //             // The current user is now set back to the teacher.
-    //             // Continue doing what you want
-    //         }, function (error) {
-    //             // The token could not be validated.
-    //             alert('error');
-    //         });
-    //     },
-    //     error: function (user, error) {
-    //         // Show the error message somewhere and let the user try again                    alert("Error: " + error.code + " " + error.message);
-    //     }
-    // });
-    //       }
 
 
 
@@ -116,7 +96,11 @@ class TanantsNavbar extends Component {
             console.log('User signed up', newParseCommittee);
             console.log(newParseCommittee.id)
 
-            const tanantDetails = " העבר לדייר: " + newTanantUser.lname + "  אימייל: " + newTanantUser.email + "   סיסמא: " + newTanantUser.pwd;
+            const tanantDetails1 = " העבר לדייר: ";
+            const tanantDetails2 = " שם משתמש:   " + newTanantUser.lname;
+            const tanantDetails3 = "  אימייל:    " + newTanantUser.email;
+            const tanantDetails4 = "   סיסמא:    " + newTanantUser.pwd;
+
 
 
 
@@ -124,7 +108,10 @@ class TanantsNavbar extends Component {
                 users: this.state.users.concat(new TanantsModel(newParseCommittee)),
                 showSignUpModal: true,
                 titleText: "רישום דייר בוצע בהצלחה !",
-                bodyText: tanantDetails,
+                bodyText1: tanantDetails1,
+                bodyText2: tanantDetails2,
+                bodyText3: tanantDetails3,
+                bodyText4: tanantDetails4,
                 colorstyle: greencolor
             })
         }).catch(error => {
@@ -143,7 +130,11 @@ class TanantsNavbar extends Component {
             this.setState({
                 showSignUpModal: true,
                 titleText: "רישום דייר נכשל ",
-                bodyText: "שם קיים במערכת", //Translate
+                bodyText1: "שם קיים במערכת", //Translate
+                bodyText2: "",
+                bodyText3: "",
+                bodyText4: "",
+
                 colorstyle: redcolor
             })
         });
@@ -202,7 +193,10 @@ class TanantsNavbar extends Component {
                 users: this.state.users.concat(new TanantsModel(newParseCommittee)),
                 showSignUpModal: true,
                 titleText: "רישום חבר ועד בוצע בהצלחה !",
-                bodyText: "בצע כניסה להמשך עבודה",
+                bodyText1: "בצע כניסה להמשך עבודה",
+                bodyText2: "",
+                bodyText3: "",
+                bodyText4: "",
                 colorstyle: greencolor
             })
         }).catch(error => {
@@ -232,7 +226,10 @@ class TanantsNavbar extends Component {
             this.setState({
                 showSignUpModal: true,
                 titleText: "רישום חבר ועד נכשל ",
-                bodyText: "שם קיים במערכת", //Translate
+                bodyText1: "שם קיים במערכת", //Translate
+                bodyText2: "",
+                bodyText3: "",
+                bodyText4: "",
                 colorstyle: redcolor
             })
         });
@@ -241,7 +238,7 @@ class TanantsNavbar extends Component {
 
     }
     render() {
-        const { showNewCommitteeModal, showNewTanantModal, showSignUpModal, isCommitteeMember, bodyText, titleText, colorstyle } = this.state;
+        const { showNewCommitteeModal, showNewTanantModal, showSignUpModal, isCommitteeMember, bodyText1, bodyText2, bodyText3, bodyText4, titleText, colorstyle } = this.state;
         const { activeUser, isCommitteeUser } = this.props;
 
         const dashboardLink = activeUser ? <Nav.Link className="navlink" href="#/dashboard" >תצוגות</Nav.Link> : null;
@@ -299,7 +296,7 @@ class TanantsNavbar extends Component {
                 <NewCommitteeModal activeUser={activeUser} isCommitteeUser={isCommitteeUser} show={showNewCommitteeModal} handleClose={this.handleClose} handleNewCommitteeUser={this.handleNewCommitteeUser} />
                 <NewTanantModal activeUser={activeUser} isCommitteeUser={isCommitteeUser} show={showNewTanantModal} handleClose={this.handleClose} handleNewTanantUser={this.handleNewTanantUser} />
 
-                <SignUpModal show={showSignUpModal} handleClose={this.handleClose} titleText={titleText} bodyText={bodyText} colorstyle={colorstyle} />
+                <SignUpModal show={showSignUpModal} handleClose={this.handleClose} titleText={titleText} bodyText1={bodyText1} bodyText2={bodyText2} bodyText2={bodyText2} bodyText3={bodyText3} bodyText4={bodyText4} colorstyle={colorstyle} />
             </div>
         );
 

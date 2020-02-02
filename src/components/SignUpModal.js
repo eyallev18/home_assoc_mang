@@ -7,7 +7,7 @@ class SignUpModal extends Component {
         super(props);
     }
     render() {
-        const { show, handleClose, titleText, bodyText, colorstyle } = this.props;
+        const { show, handleClose, titleText, bodyText1, bodyText2, bodyText3, bodyText4, colorstyle } = this.props;
         return (
             <Modal className="align_right" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -15,7 +15,10 @@ class SignUpModal extends Component {
                 </Modal.Header>
                 <Modal.Body className="myModalCss">
 
-                    {bodyText}
+                    <p> {bodyText1}</p>
+                    <p>{bodyText2}</p>
+                    <p>{bodyText3}</p>
+                    <p>{bodyText4}</p>
 
                 </Modal.Body>
                 <Modal.Footer>

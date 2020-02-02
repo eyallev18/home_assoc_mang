@@ -71,24 +71,24 @@ class NewCommitteeModal extends Component {
                 <Modal.Body>
                     <Form>
                         <Form.Group>
-                            <Form.Label controlId="formGridZip">שם דייר</Form.Label>
+                            <Form.Label controlId="formGridZip1">שם דייר</Form.Label>
                             <Form.Control name="lname" value={lname}
                                 type="text" placeholder="הכנס שם חבר ועד" onChange={this.handleInputChange} />
                         </Form.Group>
 
                         <Form.Group>
-                            <Form.Label controlId="formGridZip">כתובת אימייל</Form.Label>
+                            <Form.Label controlId="formGridZip1">כתובת אימייל</Form.Label>
                             <Form.Control name="email" value={email}
                                 type="text" placeholder="הכנס כתובת אימייל" onChange={this.handleInputChange} />
                         </Form.Group>
                         <Form.Row>
                             <Form.Group>
-                                <Form.Label as={Col} controlId="formGridZip">סיסמא </Form.Label>
+                                <Form.Label as={Col} controlId="formGridZip3">סיסמא </Form.Label>
                                 <Form.Control name="pwd" value={pwd}
                                     type="password" placeholder="הכנס סיסמא " onChange={this.handleInputChange} />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label as={Col} controlId="formGridZip">אימות סיסמא </Form.Label>
+                                <Form.Label as={Col} controlId="formGridZip4">אימות סיסמא </Form.Label>
                                 <Form.Control name="pwdv" value={pwdv}
                                     type="password" placeholder="הכנס סיסמא שוב " onChange={this.handleInputChange} />
                             </Form.Group>
@@ -96,25 +96,25 @@ class NewCommitteeModal extends Component {
                         <Form.Row>
 
                             <Form.Group>
-                                <Form.Label as={Col} controlId="formGridZip">עיר</Form.Label>
+                                <Form.Label as={Col} controlId="formGridZip5">עיר</Form.Label>
                                 <Form.Control name="City" value={City}
                                     type="text" placeholder="הכנס שם עיר" onChange={this.handleInputChange} />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label as={Col} controlId="formGridZip">רחוב</Form.Label>
+                                <Form.Label as={Col} controlId="formGridZip6">רחוב</Form.Label>
                                 <Form.Control name="street" value={street}
                                     type="text" placeholder="הכנס שם רחוב " onChange={this.handleInputChange} />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group>
-                                <Form.Label as={Col} controlId="formGridZip"> מספר בית</Form.Label>
+                                <Form.Label as={Col} controlId="formGridZip7"> מספר בית</Form.Label>
                                 <Form.Control name="building" value={building}
                                     type="text" placeholder="הכנס מספר בית " onChange={this.handleInputChange} />
                             </Form.Group>
 
                             <Form.Group>
-                                <Form.Label as={Col} controlId="formGridZip"> מספר דירה</Form.Label>
+                                <Form.Label as={Col} controlId="formGridZip8"> מספר דירה</Form.Label>
                                 <Form.Control name="apartment" value={apartment}
                                     type="text" placeholder="הכנס מספר  דירה " onChange={this.handleInputChange} />
                             </Form.Group>
