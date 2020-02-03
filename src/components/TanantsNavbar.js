@@ -40,6 +40,25 @@ class TanantsNavbar extends Component {
 
     }
 
+    async componentDidMount() {
+        if (this.props.activeUser) {
+            const User = Parse.Object.extend('User');
+            const query = new Parse.Query(User);
+            query.equalTo("community", this.props.activeUser.attributes.community);
+
+            const parseUsers = await query.find();
+            const users = parseUsers.map(parseUser => new TanantsModel(parseUser));
+            this.setState({ users });
+            // query.find().then((parseRecipes) => {
+            //     const recipes = parseRecipes.map(parseRecipe => new RecipeModel(parseRecipe));
+            //     this.setState({ recipes });
+            // }, (error) => {
+            //     console.error('Error while fetching Recipe', error);
+            // });
+        }
+    }
+
+
 
     handleClose() {
         this.setState({
