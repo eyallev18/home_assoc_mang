@@ -17,8 +17,14 @@ class NewMessageModal extends Component {
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.createMessage = this.createMessage.bind(this);
+        this.handleOptionChange = this.handleOptionChange.bind(this);
 
     }
+    handleOptionChange = changeEvent => {
+        this.setState({
+            priority: changeEvent.target.value
+        });
+    };
 
     handleInputChange(event) {
         const target = event.target;
@@ -80,22 +86,28 @@ class NewMessageModal extends Component {
                                         type="radio"
                                         label="רגילה"
                                         name="formHorizontalRadios"
+                                        value="רגילה"
+                                        checked={this.state.priority === "רגילה"}
                                         id="formHorizontalRadios1"
-                                        onChange={this.handleInputChange}
+                                        onChange={this.handleOptionChange}
                                     />
                                     <Form.Check
                                         type="radio"
                                         label="גבוהה"
                                         name="formHorizontalRadios"
+                                        value="גבוהה"
+                                        checked={this.state.priority === "גבוהה"}
                                         id="formHorizontalRadios2"
-                                        onChange={this.handleInputChange}
+                                        onChange={this.handleOptionChange}
                                     />
                                     <Form.Check
                                         type="radio"
                                         label="דחופה"
                                         name="formHorizontalRadios"
+                                        value="דחופה"
+                                        checked={this.state.priority === "דחופה"}
                                         id="formHorizontalRadios3"
-                                        onChange={this.handleInputChange}
+                                        onChange={this.handleOptionChange}
                                     />
                                 </Col>
                             </Form.Group>

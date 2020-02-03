@@ -23,13 +23,14 @@ class MessagePage extends Component {
     }
     async componentDidMount() {
         if (this.props.activeUser) {
-            const Message = Parse.Object.extend('Message');
+            const Message = Parse.Object.extend('message');
             const query = new Parse.Query(Message);
             query.equalTo("community", this.props.activeUser.attributes.community);
 
             const parseMessages = await query.find();
             const messages = parseMessages.map(parseMessage => new MessageModel(parseMessage));
             this.setState({ messages });
+            console.log(messages);
             // query.find().then((parseRecipes) => {
             //     const recipes = parseRecipes.map(parseRecipe => new RecipeModel(parseRecipe));
             //     this.setState({ recipes });
@@ -74,6 +75,8 @@ class MessagePage extends Component {
         if (!activeUser) {
             return <Redirect to="/" />
         }
+
+
         return (
             <div className="Hebrew">
                 <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} />
