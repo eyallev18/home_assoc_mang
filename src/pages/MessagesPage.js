@@ -50,12 +50,12 @@ class MessagePage extends Component {
         const message = Parse.Object.extend('message');
         const newParseMessage = new message();
 
-        newParseMessage.set('createdBy', activeUser.name);
+        newParseMessage.set('createdBy', activeUser.attributes.username);
         newParseMessage.set('title', newMessage.title);
         newParseMessage.set('details', newMessage.details);
         newParseMessage.set('priority', newMessage.priority);
-        newParseMessage.set('comunity', activeUser.community);
-        newParseMessage.set('comments', activeUser.comments);
+        newParseMessage.set('community', activeUser.attributes.community);
+        newParseMessage.set('comments', newMessage.comments);
 
         newParseMessage.save().then(theCreatedParseMessage => {
             console.log('Message created', theCreatedParseMessage);
