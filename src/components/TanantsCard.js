@@ -17,7 +17,7 @@ class TanantsCard extends Component {
 
 
 
-                <Card border="success" style={{ width: '18rem' }}>
+                <Card border="primary" style={{ width: '18rem' }}>
                     <Card.Header>{user.username}</Card.Header>
                     <Card.Body>
                         <Card.Title>{user.email}</Card.Title>

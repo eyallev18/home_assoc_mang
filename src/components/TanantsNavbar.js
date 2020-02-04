@@ -17,7 +17,7 @@ class TanantsNavbar extends Component {
         super(props);
 
         this.state = {
-            // users: [],
+
             showNewCommitteeModal: false,
             showNewTanantModal: false,
             showSignUpModal: false,
@@ -58,7 +58,24 @@ class TanantsNavbar extends Component {
     //     }
     // }
 
+    async componentDidMount() {
 
+        if (this.props.activeUser) {
+            const User = Parse.Object.extend('User');
+            const query = new Parse.Query(User);
+            query.equalTo("community", this.props.activeUser.attributes.community);
+
+            const parseUsers = await query.find();
+            const users = parseUsers.map(parseUser => { new TanantsModel(parseUser); this.props.changeuser(parseUser); });
+            //this.props.changeuser(parseUsers);
+            // query.find().then((parseRecipes) => {
+            //     const recipes = parseRecipes.map(parseRecipe => new RecipeModel(parseRecipe));
+            //     this.setState({ recipes });
+            // }, (error) => {
+            //     console.error('Error while fetching Recipe', error);
+            // });
+        }
+    }
 
     handleClose() {
         this.setState({
@@ -121,10 +138,10 @@ class TanantsNavbar extends Component {
             const tanantDetails4 = "   סיסמא:    " + newTanantUser.pwd;
 
 
-
+            this.props.changeuser(newParseCommittee);
 
             this.setState({
-                users: this.props.users.concat(new TanantsModel(newParseCommittee)),
+                // users: this.state.users.concat(new TanantsModel(newParseCommittee)),
                 showSignUpModal: true,
                 titleText: "רישום דייר בוצע בהצלחה !",
                 bodyText1: tanantDetails1,
@@ -199,6 +216,7 @@ class TanantsNavbar extends Component {
                     // Ex: response.get("<ATTRIBUTE_NAME>")
                     // if (typeof document !== 'undefined') document.write(`Updated Community: ${JSON.stringify(response)}`);
                     console.log('Updated Community', response);
+                    // this.props.changeuser(newCommitteeUser);
                 }, (error) => {
                     //  if (typeof document !== 'undefined') document.write(`Error while updating Community: ${JSON.stringify(error)}`);
                     console.error('Error while updating Community', error);
@@ -209,7 +227,7 @@ class TanantsNavbar extends Component {
 
 
             this.setState({
-                users: this.props.users.concat(new TanantsModel(newParseCommittee)),
+                //users: this.state.users.concat(new TanantsModel(newParseCommittee)),
                 showSignUpModal: true,
                 titleText: "רישום חבר ועד בוצע בהצלחה !",
                 bodyText1: "בצע כניסה להמשך עבודה",

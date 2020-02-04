@@ -46,6 +46,7 @@ class NewCommitteeModal extends Component {
             lname: "",
             email: "",
             pwd: "",
+            pwdv: "",
             apartment: "",
             street: "",
             building: "",
