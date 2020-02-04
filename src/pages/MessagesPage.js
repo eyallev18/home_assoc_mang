@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import './MessagePage.css'
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert, Col, Card, Row } from 'react-bootstrap';
 //import { Link, Redirect } from 'react-router-dom';
 import Parse from 'parse'
 import { Link, Redirect } from 'react-router-dom';
 import TanantsNavbar from '../components/TanantsNavbar';
 import MessageModel from '../model/MessageModel'
 import NewMessageModal from '../components/NewMessageModal';
+import MessageCard from '../components/MessageCard';
+import Collapse from "../components/Collapse";
+
+const { Body, Header, Title } = Card;
 
 class MessagePage extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+
             messages: [],
             showNewMessageModal: false
 
@@ -69,20 +74,50 @@ class MessagePage extends Component {
     }
 
     render() {
-        const { showNewMessageModal } = this.state;
+        const panels = [
+            "Add Edit Menus",
+            "Resource Management",
+            "Asset Management",
+            "User Management",
+            "Account Management"
+        ];
+
+        const { showNewMessageModal, messages } = this.state;
 
         const { activeUser, isCommitteeUser, handeLogout } = this.props;
         if (!activeUser) {
             return <Redirect to="/" />
         }
-
+        const messageView = messages.map(message =>
+            <Col lg={4} md={6} key={message.id}>
+                <MessageCard message={message} />
+            </Col>)
 
         return (
             <div className="Hebrew">
                 <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} />
                 <h1>I'm Message Page</h1>
-                <Button onClick={() => { this.setState({ showNewMessageModal: true }) }}>צור הודעה חדשה</Button>
 
+
+                <Button onClick={() => { this.setState({ showNewMessageModal: true }) }}>צור הודעה חדשה</Button>
+                <div className="app-container">
+                    <div className="accordion-container">
+                        {panels.map(title => (
+                            <div className={`${this.state.isActive ? "active" : "inactive"}`}>
+                                <Card>
+                                    <Header style={{ padding: 0 }}>
+                                        <Row>
+                                            <MessageCard key={title} title={title} />
+                                        </Row>
+                                    </Header>
+                                    <Collapse>
+                                        <Body style={{ padding: 10 }}>Test Text 456</Body>
+                                    </Collapse>
+                                </Card>
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
                 <NewMessageModal activeUser={activeUser} isCommitteeUser={isCommitteeUser} show={showNewMessageModal} handleClose={this.handleClose} handleNewMessage={this.handleNewMessage} />
             </div>

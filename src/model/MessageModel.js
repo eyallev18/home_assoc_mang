@@ -1,6 +1,6 @@
 export default class MessageModel {
     constructor(messageModel) {
-        this.id = messageModel.get("objectId");
+        this.id = messageModel.id;
         this.createdBy = messageModel.get("createdBy");
         this.createdAt = messageModel.get("createdAt");
         this.community = messageModel.get("community");
