@@ -18,9 +18,9 @@ class TanantsCard extends Component {
 
 
                 <Card border="primary" style={{ width: '18rem' }}>
-                    <Card.Header style={{ margin: 'auto', fontWeight: 'bold', backgroundColor: 'cyan', textDecoration: 'underline' }}>{user.lname}: משפחת </Card.Header>
+                    <Card.Header style={{ margin: 'auto', fontWeight: 'bold', backgroundColor: 'cyan', textDecoration: 'underline' }}>   משפחת : {user.lname} </Card.Header>
                     <Card.Body>
-                        <Card.Title> {user.email} : אימייל </Card.Title>
+                        <Card.Title> {user.backupemail} : אימייל </Card.Title>
                         <Card.Text>
                             {user.apartment} : דירה מספר
                         </Card.Text>

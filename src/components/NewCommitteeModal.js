@@ -16,7 +16,8 @@ class NewCommitteeModal extends Component {
             building: "",
             apartment: "",
             isCommitteeMember: true,
-            community: null
+            community: null,
+            backupemail: ""
 
 
 
@@ -37,8 +38,8 @@ class NewCommitteeModal extends Component {
     }
 
     createCommitteeUser() {
-        const { lname, email, pwd, pwdv, apartment, street, building, City, isCommitteeMember } = this.state;
-        const newCommitteeUser = { lname, email, pwd, apartment, isCommitteeMember, City, street, building };
+        const { lname, email, pwd, pwdv, apartment, street, building, City, isCommitteeMember, backupemail } = this.state;
+        const newCommitteeUser = { lname, email, pwd, apartment, isCommitteeMember, City, street, building, backupemail };
         this.props.handleNewCommitteeUser(newCommitteeUser);  // in TanantsNavbar.js
         // this.props.handleLogin(newCommitteeUser);
         this.props.handleClose();

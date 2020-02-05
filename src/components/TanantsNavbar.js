@@ -98,7 +98,7 @@ class TanantsNavbar extends Component {
         //const newComunity = new Parse.Object("Community");
         newParseCommittee.set('community', this.props.activeUser.attributes.community);
         newParseCommittee.set('password', newTanantUser.pwd);
-
+        newParseCommittee.set('backupemail', newTanantUser.email);
         const sessionToken = Parse.User.current().get("sessionToken");
 
         newParseCommittee.signUp().then((newParseCommittee) => {
@@ -179,7 +179,7 @@ class TanantsNavbar extends Component {
         const newComunity = new Parse.Object("Community");
         newParseCommittee.set('community', newComunity);
         newParseCommittee.set('password', newCommitteeUser.pwd);
-
+        newParseCommittee.set('backupemail', newCommitteeUser.email);
 
 
         newParseCommittee.signUp().then((newParseCommittee) => {

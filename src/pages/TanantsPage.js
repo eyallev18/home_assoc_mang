@@ -14,8 +14,8 @@ class TanantsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: [],
-            community: null
+            users: []
+
 
 
         };
@@ -48,9 +48,9 @@ class TanantsPage extends Component {
             // const parsourcommunity = parseCommunity.map(parseCommunity => { new CommunityModel(parseCommunity); });
 
             console.log(myCommunity);
-            this.setState({
-                community: myCommunity
-            });
+
+            this.props.handleGetCommunity(myCommunity);
+
             //this.props.changeuser(parseUsers);
             // query.find().then((parseRecipes) => {
             //     const recipes = parseRecipes.map(parseRecipe => new RecipeModel(parseRecipe));
@@ -62,7 +62,7 @@ class TanantsPage extends Component {
     }
 
     render() {
-        const { activeUser, isCommitteeUser, handeLogout } = this.props;
+        const { activeUser, isCommitteeUser, handeLogout, mycommunity } = this.props;
         const { users, community } = this.state;
         console.log(community);
         if (!activeUser) {
@@ -73,7 +73,7 @@ class TanantsPage extends Component {
             <Col lg={4} md={6} key={user.id}>
                 <TanantsCard user={user} />
             </Col>)
-        const TanantsHeader = community == null ? <h1 className="textbuild">   הדיירים של  בית  </h1> : <h1 className="textbuild">  הדיירים של :     {community.street}  {community.bulding} {community.City}  </h1>
+        const TanantsHeader = mycommunity == null ? <h1 className="textbuild">   הדיירים של  בית  </h1> : <h1 className="textbuild">  הדיירים של :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
 
         return (
             <div>

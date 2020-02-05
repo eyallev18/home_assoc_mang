@@ -22,12 +22,20 @@ class App extends React.Component {
     this.state = {
       activeUser: null,
       committeeUser: null,
-      isCommitteeUser: false
+      isCommitteeUser: false,
+      mycommunity: null
+
     }
     //this.handeLogout = this.handeLogout.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handeLogout = this.handeLogout.bind(this);
 
+
+  }
+
+
+  handleGetCommunity = (community) => {
+    this.setState({ mycommunity: community })
   }
 
   handleLogin(user) {
@@ -49,12 +57,12 @@ class App extends React.Component {
   }
 
   render() {
-    const { activeUser, committeeUser, isCommitteeUser } = this.state;
+    const { activeUser, committeeUser, isCommitteeUser, mycommunity } = this.state;
     return (
 
       <Switch>
         <Route exact path="/">
-          <HomePage activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={this.handeLogout} handleLogin={this.handleLogin} />
+          <HomePage activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={this.handeLogout} />
         </Route>
         <Route exact path="/login">
           <LoginPage handleLogin={this.handleLogin} isCommitteeUser={isCommitteeUser} />
@@ -63,10 +71,10 @@ class App extends React.Component {
           <DashboardPage activeUser={activeUser} handeLogout={this.handeLogout} />
         </Route>
         <Route exact path="/tanants">
-          <TanantsPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} />
+          <TanantsPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} handeLogout={this.handeLogout} handleGetCommunity={this.handleGetCommunity} mycommunity={mycommunity} />
         </Route>
         <Route exact path="/messages">
-          <MessagesPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} />
+          <MessagesPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} mycommunity={mycommunity} />
         </Route>
         <Route exact path="/issues">
           <IssuesPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} />

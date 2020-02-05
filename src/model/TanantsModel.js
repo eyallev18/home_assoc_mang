@@ -7,5 +7,6 @@ export default class TanantsModel {
         this.apartment = parseTanants.get("apartment");
         this.isCommitteeMember = parseTanants.get("isCommitteeMember");
         this.community = parseTanants.get("community");
+        this.backupemail = parseTanants.get("backupemail");
     }
 }

@@ -78,7 +78,7 @@ class MessagePage extends Component {
 
         const { showNewMessageModal, messages } = this.state;
 
-        const { activeUser, isCommitteeUser, handeLogout } = this.props;
+        const { activeUser, isCommitteeUser, handeLogout, mycommunity } = this.props;
         if (!activeUser) {
             return <Redirect to="/" />
         }
@@ -86,11 +86,12 @@ class MessagePage extends Component {
             <Col lg={4} md={6} key={message.id}>
                 <MessageCard message={message} />
             </Col>)
+        const MessageHeader = mycommunity == null ? <h1 className="textbuild">   הודעות קהילת ועד  : </h1> : <h1 className="textbuild">  הודעות קהילת ועד  :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
 
         return (
             <div className="Hebrew">
                 <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} />
-                <h1 className="textbuild">הודעות קהילת ועד ברחוב :  </h1>
+                {MessageHeader}
 
 
                 <Button className="createb" onClick={() => { this.setState({ showNewMessageModal: true }) }}>צור הודעה חדשה</Button>
