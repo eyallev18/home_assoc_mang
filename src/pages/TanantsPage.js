@@ -14,7 +14,8 @@ class TanantsPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            users: [],
+            community: null
 
 
         };
@@ -47,6 +48,9 @@ class TanantsPage extends Component {
             // const parsourcommunity = parseCommunity.map(parseCommunity => { new CommunityModel(parseCommunity); });
 
             console.log(myCommunity);
+            this.setState({
+                community: myCommunity
+            });
             //this.props.changeuser(parseUsers);
             // query.find().then((parseRecipes) => {
             //     const recipes = parseRecipes.map(parseRecipe => new RecipeModel(parseRecipe));
@@ -60,6 +64,7 @@ class TanantsPage extends Component {
     render() {
         const { activeUser, isCommitteeUser, handeLogout } = this.props;
         const { users, community } = this.state;
+        console.log(community);
         if (!activeUser) {
             return <Redirect to="/" />
         }
@@ -68,13 +73,14 @@ class TanantsPage extends Component {
             <Col lg={4} md={6} key={user.id}>
                 <TanantsCard user={user} />
             </Col>)
+        const TanantsHeader = community == null ? <h1 className="textbuild">   הדיירים של  בית  </h1> : <h1 className="textbuild">  הדיירים של :     {community.street}  {community.bulding} {community.City}  </h1>
 
         return (
             <div>
                 <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} changeuser={this.updateUsers} />
                 <Container>
                     <div className="users-header">
-                        <h1 className="textbuild">   הדיירים של  רחוב </h1>
+                        {TanantsHeader}
 
                     </div>
                     <Row className="padding">
