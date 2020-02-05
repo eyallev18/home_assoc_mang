@@ -1,9 +1,9 @@
 export default class CommunityModel {
-    constructor(community) {
-        this.id = community.id;
-        this.lname = community.get("City");
-        this.email = community.get("street");
-        this.apartment = community.get("building");
+    constructor(Community) {
+        this.id = Community.id;
+        this.City = Community.get("City");
+        this.street = Community.get("street");
+        this.bulding = Community.get("building");
 
     }
 }

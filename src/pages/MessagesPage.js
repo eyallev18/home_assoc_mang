@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './MessagePage.css'
-import { Form, Button, Alert, Col, Card, Row } from 'react-bootstrap';
+import { Form, Button, Alert, Col, Card, Row, Accordion } from 'react-bootstrap';
 //import { Link, Redirect } from 'react-router-dom';
 import Parse from 'parse'
 import { Link, Redirect } from 'react-router-dom';
@@ -74,13 +74,7 @@ class MessagePage extends Component {
     }
 
     render() {
-        const panels = [
-            "Add Edit Menus",
-            "Resource Management",
-            "Asset Management",
-            "User Management",
-            "Account Management"
-        ];
+
 
         const { showNewMessageModal, messages } = this.state;
 
@@ -96,28 +90,14 @@ class MessagePage extends Component {
         return (
             <div className="Hebrew">
                 <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} />
-                <h1>I'm Message Page</h1>
+                <h1 className="textbuild">הודעות קהילת ועד ברחוב :  </h1>
 
 
-                <Button onClick={() => { this.setState({ showNewMessageModal: true }) }}>צור הודעה חדשה</Button>
-                <div className="app-container">
-                    <div className="accordion-container">
-                        {panels.map(title => (
-                            <div className={`${this.state.isActive ? "active" : "inactive"}`}>
-                                <Card>
-                                    <Header style={{ padding: 0 }}>
-                                        <Row>
-                                            <MessageCard key={title} title={title} />
-                                        </Row>
-                                    </Header>
-                                    <Collapse>
-                                        <Body style={{ padding: 10 }}>Test Text 456</Body>
-                                    </Collapse>
-                                </Card>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                <Button className="createb" onClick={() => { this.setState({ showNewMessageModal: true }) }}>צור הודעה חדשה</Button>
+                <Accordion defaultActiveKey="0">
+                    {messageView}
+
+                </Accordion>
 
                 <NewMessageModal activeUser={activeUser} isCommitteeUser={isCommitteeUser} show={showNewMessageModal} handleClose={this.handleClose} handleNewMessage={this.handleNewMessage} />
             </div>

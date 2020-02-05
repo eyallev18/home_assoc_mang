@@ -6,6 +6,8 @@ import Parse from 'parse'
 import TanantsNavbar from '../components/TanantsNavbar';
 import TanantsCard from '../components/TanantsCard';
 import TanantsModel from '../model/TanantsModel'
+import CommunityModel from '../model/CommunityModel'
+
 import { scryRenderedComponentsWithType } from 'react-dom/test-utils';
 import 'bootstrap/dist/css/bootstrap.min.css';
 class TanantsPage extends Component {
@@ -13,6 +15,7 @@ class TanantsPage extends Component {
         super(props);
         this.state = {
             users: []
+
 
         };
 
@@ -33,6 +36,17 @@ class TanantsPage extends Component {
 
             const parseUsers = await query.find();
             const users1 = parseUsers.map(parseUser => { new TanantsModel(parseUser); this.updateUsers(parseUser); });
+            const ourcomm = query._where.community.objectId;
+
+            const Community = Parse.Object.extend('Community');
+            const queryC = new Parse.Query(Community)
+            queryC.equalTo("objectId", ourcomm)
+            const parseCommunity = await queryC.find();
+
+            const myCommunity = new CommunityModel(parseCommunity[0]);
+            // const parsourcommunity = parseCommunity.map(parseCommunity => { new CommunityModel(parseCommunity); });
+
+            console.log(myCommunity);
             //this.props.changeuser(parseUsers);
             // query.find().then((parseRecipes) => {
             //     const recipes = parseRecipes.map(parseRecipe => new RecipeModel(parseRecipe));
@@ -45,7 +59,7 @@ class TanantsPage extends Component {
 
     render() {
         const { activeUser, isCommitteeUser, handeLogout } = this.props;
-        const { users } = this.state;
+        const { users, community } = this.state;
         if (!activeUser) {
             return <Redirect to="/" />
         }
@@ -60,7 +74,7 @@ class TanantsPage extends Component {
                 <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} changeuser={this.updateUsers} />
                 <Container>
                     <div className="users-header">
-                        <h1 className="textbuild"> הדיירים של  רחוב </h1>
+                        <h1 className="textbuild">   הדיירים של  רחוב </h1>
 
                     </div>
                     <Row className="padding">

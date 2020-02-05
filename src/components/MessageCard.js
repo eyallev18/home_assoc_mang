@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, Accordion } from "react-bootstrap";
 import Button from "../components/Button";
 
 const { Body, Header, Title } = Card;
@@ -8,29 +8,27 @@ const { Body, Header, Title } = Card;
 class MessageCard extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isActive: false
-        }
+        // this.state = {
+        //     isActive: false
+        // }
 
     }
-    toggleVisibility = () =>
-        this.setState(prevState => ({ isActive: !this.state.isActive }));
+    // toggleVisibility = () =>
+    //     this.setState(prevState => ({ isActive: !this.state.isActive }));
 
     render() {
+        const { message } = this.props;
         return (
 
             <div>
-                <Col xs={9}>
-                    <Button onClick={this.toggleVisibility}>
-                        {!this.state.isActive ? "+" : "-"}
-                    </Button>
-                    <Title style={{ display: "inline-block" }}>
-                        {this.props.title}
-                    </Title>
-                </Col>
-                <Col style={{ paddingTop: 7 }} xs={3}>
-                    Test Text 123
-            </Col>
+                <Card>
+                    <Accordion.Toggle as={Card.Header} eventKey={message.id}>
+                        {message.title}   נוצרה על ידי: {message.createdBy}
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey={message.id}>
+                        <Card.Body>{message.details} </Card.Body>
+                    </Accordion.Collapse>
+                </Card>
             </div>
 
         );
@@ -39,6 +37,3 @@ class MessageCard extends Component {
 
 export default MessageCard;
 
-MessageCard.propTypes = {
-    title: PropTypes.string.isRequired
-};
