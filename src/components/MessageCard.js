@@ -18,15 +18,31 @@ class MessageCard extends Component {
 
     render() {
         const { message } = this.props;
+        var divstyle = { backgroundColor: 'rgb(220,220,220)' };
+        if (message.priority === "רגילה") {
+            divstyle = { backgroundColor: 'rgb(220,220,220)' };
+        } else {
+            if (message.priority === "גבוהה") {
+                divstyle = { backgroundColor: 'yellow' };
+
+            } else {
+                divstyle = { backgroundColor: 'orange' };
+            }
+
+
+        }
         return (
 
             <div>
                 <Card>
-                    <Accordion.Toggle as={Card.Header} eventKey={message.id}>
-                        {message.title}   נוצרה על ידי: {message.createdBy}
+                    <Accordion.Toggle as={Card.Header} eventKey={message.id} style={divstyle}>
+                        <div className="buttonHeader">
+                            <span style={{ color: 'blue', fontWeight: 'bold' }}> {message.title} </span><img src="balckV.png" style={{ width: '20px', float: 'left', margin: "0 5px" }} /> <span style={{ color: 'green', fontWeight: 'bold', textAlign: 'center', marginLeft: '5px', float: 'left' }}>  נוצרה על ידי:   {message.createdBy} </span>
+
+                        </div>
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey={message.id}>
-                        <Card.Body>{message.details} </Card.Body>
+                        <Card.Body>{message.details}<br />{message.comments} </Card.Body>
                     </Accordion.Collapse>
                 </Card>
             </div>

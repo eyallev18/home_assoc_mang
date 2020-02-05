@@ -86,7 +86,7 @@ class LoginPage extends Component {
 
 
         }).catch(error => {
-            if (typeof document !== 'undefined') document.write(`Error while logging in user: ${JSON.stringify(error)}`);
+            {/*  if (typeof document !== 'undefined') document.write(`Error while logging in user: ${JSON.stringify(error)}`);*/ }
             console.error('Error while logging in user', error);
             this.setState({
                 showInvalidLoginError: true
@@ -103,7 +103,7 @@ class LoginPage extends Component {
         }
 
 
-        const errorAlert = showInvalidLoginError ? <Alert variant="danger">Invalid email or password!</Alert> : null;
+        const errorAlert = showInvalidLoginError ? <Alert variant="danger">שם או סיסמא שגויים או לא במערכת , אנא נסה שוב</Alert> : null;
         return (
             <div className="p-login">
                 <div className="main">

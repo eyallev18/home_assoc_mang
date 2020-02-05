@@ -1,9 +1,14 @@
-import IssuesModel from './IssuesModel'
-export default class VotingModel extends IssuesModel {
+export default class VotingModel {
     constructor(votingModel) {
-        super(votingModel.id, votingModel.createdBy, votingModel.createdAt, votingModel.details);
+        this.id = votingModel.id;
+        this.createdBy = votingModel.get("createdBy");
+        this.createdAt = votingModel.get("createdAt");
+        this.title = votingModel.get("title");
+        this.details = votingModel.get("details");
+        this.dueDate = votingModel.get("dueDate");
+        this.votes = votingModel.get("votes");
         this.options = votingModel.get("options");
-        this.duedate = votingModel.get("duedate");
-        this.vots = votingModel.get("vots");
+
+
     }
 }
