@@ -54,7 +54,9 @@ class NewTanantModal extends Component {
         const { show, handleClose, handleLogin } = this.props;
         const { lname, email, pwd, apartment } = this.state;
 
+
         return (
+
             <Modal className="align_right" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>רישום דייר בבנין</Modal.Title>

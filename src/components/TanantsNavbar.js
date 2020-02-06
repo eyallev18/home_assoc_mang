@@ -120,9 +120,9 @@ class TanantsNavbar extends Component {
             const tanantDetails3 = "  אימייל:    " + newTanantUser.email;
             const tanantDetails4 = "   סיסמא:    " + newTanantUser.pwd;
 
-
-            this.props.changeuser(newParseCommittee);
-
+            if (window.location.hash === '#/tanants') {
+                this.props.changeuser(newParseCommittee);
+            }
             this.setState({
                 // users: this.state.users.concat(new TanantsModel(newParseCommittee)),
                 showSignUpModal: true,

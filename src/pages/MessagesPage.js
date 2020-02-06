@@ -26,6 +26,7 @@ class MessagePage extends Component {
         this.handleClose = this.handleClose.bind(this);
         this.handleNewMessage = this.handleNewMessage.bind(this);
 
+
     }
     async componentDidMount() {
         if (this.props.activeUser) {
@@ -34,7 +35,12 @@ class MessagePage extends Component {
             query.equalTo("community", this.props.activeUser.attributes.community);
 
             const parseMessages = await query.find();
-            const messages = parseMessages.map(parseMessage => new MessageModel(parseMessage));
+            let messages = parseMessages.map(parseMessage => new MessageModel(parseMessage));
+            messages.sort(function (a, b) {
+                a = new Date(a.createdAt);
+                b = new Date(b.createdAt);
+                return a > b ? -1 : a < b ? 1 : 0;
+            });
             this.setState({ messages });
             console.log(messages);
             // query.find().then((parseRecipes) => {
@@ -45,6 +51,7 @@ class MessagePage extends Component {
             // });
         }
     }
+
 
     handleClose() {
         this.setState({
@@ -66,8 +73,13 @@ class MessagePage extends Component {
 
         newParseMessage.save().then(theCreatedParseMessage => {
             console.log('Message created', theCreatedParseMessage);
+
             this.setState({
-                messages: this.state.messages.concat(new MessageModel(theCreatedParseMessage))
+                messages: this.state.messages.concat(new MessageModel(theCreatedParseMessage)).sort(function (a, b) {
+                    a = new Date(a.createdAt);
+                    b = new Date(b.createdAt);
+                    return a > b ? -1 : a < b ? 1 : 0;
+                })
             })
         }, error => {
             console.error('Error while creating Message: ', error);
@@ -103,9 +115,9 @@ class MessagePage extends Component {
                 ],
 
                 hoverBackgroundColor: [
-                    'rgb(220,220,220)',
-                    'yellow',
-                    'orange']
+                    'rgb(120,120,120)',
+                    'greenyellow',
+                    'rgb(210,151,100)']
             }]
         };
 
@@ -132,7 +144,7 @@ class MessagePage extends Component {
 
         return (
             <div className="Hebrew">
-                <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} />
+                <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} changeuser={this.updateUsers} />
                 {MessageHeader}
 
 
