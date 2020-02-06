@@ -2,6 +2,7 @@
     direction: rtl;
     box-sizing: border-box;
     padding: 0px 16px;
+    height: 100%;
     background: linear-gradient(to bottom, blue 0%, rgb(0,180,255) 100%)!important;
     
 }
@@ -9,8 +10,12 @@
     color:white!important;
     font-weight: bold;
     flex-wrap: nowrap;
+    
 
     
+}
+.navlink {
+    height: 100%!important;
 }
 .different{
     color: rgb(150,150,150)!important;

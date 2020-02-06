@@ -34,3 +34,13 @@
   .createb{
     margin-bottom: 20px;
 }  
+.floatchart{
+    display: flex;
+}
+.rightitem, .leftitem {
+ flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  
+  
+}

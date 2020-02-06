@@ -17,6 +17,7 @@ class MessageCard extends Component {
     //     this.setState(prevState => ({ isActive: !this.state.isActive }));
 
     render() {
+
         const { message } = this.props;
         var divstyle = { backgroundColor: 'rgb(220,220,220)' };
         if (message.priority === "רגילה") {
@@ -31,13 +32,14 @@ class MessageCard extends Component {
 
 
         }
+        const datecreated = message.createdAt.toLocaleString();
         return (
 
             <div>
                 <Card>
                     <Accordion.Toggle as={Card.Header} eventKey={message.id} style={divstyle}>
                         <div className="buttonHeader">
-                            <span style={{ color: 'blue', fontWeight: 'bold' }}> {message.title} </span><img src="balckV.png" style={{ width: '20px', float: 'left', margin: "0 5px" }} /> <span style={{ color: 'green', fontWeight: 'bold', textAlign: 'center', marginLeft: '5px', float: 'left' }}>  נוצרה על ידי:   {message.createdBy} </span>
+                            <span style={{ color: 'blue', fontWeight: 'bold' }}> {message.title} </span><img src="balckV.png" style={{ width: '20px', float: 'left', margin: "0 5px" }} /> <span style={{ color: 'green', fontWeight: 'bold', textAlign: 'center', marginLeft: '5px', float: 'left' }}>  נוצרה על ידי:   {message.createdBy} <br />{datecreated} </span>
 
                         </div>
                     </Accordion.Toggle>

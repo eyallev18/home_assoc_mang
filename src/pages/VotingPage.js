@@ -40,11 +40,12 @@ class VotingPage extends Component {
     }
 
     render() {
-        const { activeUser, isCommitteeUser, handeLogout } = this.props;
+        const { activeUser, isCommitteeUser, handeLogout, mycommunity } = this.props;
         const { votings } = this.state;
         if (!activeUser) {
             return <Redirect to="/" />
         }
+        const VotingHeader = mycommunity == null ? <h1 className="textbuild">   הצבעות  : </h1> : <h1 className="textbuild">  הצבעות   :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
         const votesView = votings.map(voting =>
             <Col lg={4} md={6} key={voting.id}>
                 <VotingCard voting={voting} />
@@ -56,7 +57,7 @@ class VotingPage extends Component {
         return (
             <div className="Hebrew">
                 <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} />
-                <h1>I'm Voting Page</h1>
+                {VotingHeader}
                 {votesView}
             </div>
 

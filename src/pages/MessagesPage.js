@@ -9,6 +9,7 @@ import MessageModel from '../model/MessageModel'
 import NewMessageModal from '../components/NewMessageModal';
 import MessageCard from '../components/MessageCard';
 import Collapse from "../components/Collapse";
+import { Pie } from 'react-chartjs-2';
 
 const { Body, Header, Title } = Card;
 
@@ -73,20 +74,61 @@ class MessagePage extends Component {
         });
     }
 
+    getChartData(messages) {
+        let messagesData = [0, 0, 0];
+
+        messages.forEach(message => {
+            if (message.priority === 'רגילה') {
+                ++messagesData[0];
+            } else if (message.priority === 'גבוהה') {
+                ++messagesData[1];
+            } else {
+                ++messagesData[2];
+            }
+        })
+
+
+        return {
+            labels: [
+                'רגילה',
+                'גבוהה',
+                'דחופה',
+            ],
+            datasets: [{
+                data: messagesData,
+                backgroundColor: [
+                    'rgb(220,220,220)',
+                    'yellow',
+                    'orange'
+                ],
+
+                hoverBackgroundColor: [
+                    'rgb(220,220,220)',
+                    'yellow',
+                    'orange']
+            }]
+        };
+
+    }
+
+
     render() {
 
 
         const { showNewMessageModal, messages } = this.state;
+        const chartData = this.getChartData(messages);
+
 
         const { activeUser, isCommitteeUser, handeLogout, mycommunity } = this.props;
         if (!activeUser) {
             return <Redirect to="/" />
         }
+
         const messageView = messages.map(message =>
-            <Col lg={4} md={6} key={message.id}>
+            <Col lg={12} md={12} key={message.id}>
                 <MessageCard message={message} />
             </Col>)
-        const MessageHeader = mycommunity == null ? <h1 className="textbuild">   הודעות קהילת ועד  : </h1> : <h1 className="textbuild">  הודעות קהילת ועד  :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
+        const MessageHeader = mycommunity == null ? <h1 className="textbuild">   הודעות בנין : </h1> : <h1 className="textbuild">  הודעות בנין :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
 
         return (
             <div className="Hebrew">
@@ -95,11 +137,17 @@ class MessagePage extends Component {
 
 
                 <Button className="createb" onClick={() => { this.setState({ showNewMessageModal: true }) }}>צור הודעה חדשה</Button>
-                <Accordion defaultActiveKey="0">
-                    {messageView}
+                <div className="floatchart">
+                    <div style={{ width: '50%' }}>
+                        <Accordion className="rightitem" defaultActiveKey="0">
+                            {messageView}
 
-                </Accordion>
-
+                        </Accordion>
+                    </div>
+                    <div style={{ width: '50%' }}>
+                        <Pie className="leftitem" data={chartData} />
+                    </div>
+                </div>
                 <NewMessageModal activeUser={activeUser} isCommitteeUser={isCommitteeUser} show={showNewMessageModal} handleClose={this.handleClose} handleNewMessage={this.handleNewMessage} />
             </div>
 

@@ -275,14 +275,14 @@ class TanantsNavbar extends Component {
         </NavDropdown> : null;
 
         const signupLink = !activeUser ? <Nav.Link className="navlink different" onClick={() => { this.setState({ showNewCommitteeModal: true }) }} > רישום ועד בית חדש (מבוצע בפעם הראשונה ע"י ועד הבית ) </Nav.Link> : null;
-        const loginLink = !activeUser ? <Nav.Link className="navlink" href="#/login"> כניסת דיירים או ועד בית</Nav.Link> : null;
+        const loginLink = !activeUser ? <Nav.Link className="navlink" href="#/login"> כניסה </Nav.Link> : null;
         const logoutLink = activeUser ? <Nav.Link className="navlink" href="#/" onClick={this.props.handeLogout} >התנתק</Nav.Link> : null;
         // && !isCommitteeMember
         // && isCommitteeMember
         return (
             <div>
                 <Navbar className="hebrew" bg="primary" expand="lg">
-                    <Navbar.Brand className="navlink" href="#/"> <img src="navbarpic.jpg" style={{ width: '60px', marginLeft: '10px' }} />ועד בית</Navbar.Brand>
+                    <Navbar.Brand className="navlink" href="#/"> <img src="navbarpic.jpg" style={{ width: '40px', marginLeft: '5px' }} />ועד בית</Navbar.Brand>
 
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
