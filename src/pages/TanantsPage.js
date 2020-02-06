@@ -73,7 +73,7 @@ class TanantsPage extends Component {
             <Col lg={4} md={6} key={user.id}>
                 <TanantsCard user={user} />
             </Col>)
-        const TanantsHeader = mycommunity == null ? <h1 className="textbuild">   הדיירים של  בית  </h1> : <h1 className="textbuild">  הדיירים של :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
+        const TanantsHeader = mycommunity == null ? <h1 className="textbuild">    </h1> : <h1 className="textbuild">      {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
 
         return (
             <div>

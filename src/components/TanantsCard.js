@@ -11,14 +11,15 @@ class TanantsCard extends Component {
 
     render() {
         const { user } = this.props;
-
+        const cardstyle = user.isCommitteeMember ? { width: '18rem', backgroundColor: 'hsl(207, 48%, 85%)', marginBottom: '15px' } : { width: '18rem', backgroundColor: '#e9ecef', marginBottom: '15px' };
+        const status = user.isCommitteeMember ? " ועד הבית" : "דיירים";
         return (
             <div className="user">
 
 
 
-                <Card border="primary" style={{ width: '18rem' }}>
-                    <Card.Header style={{ margin: 'auto', fontWeight: 'bold', backgroundColor: 'cyan', textDecoration: 'underline' }}>   משפחת : {user.lname} </Card.Header>
+                <Card border="primary" style={cardstyle}>
+                    <Card.Header style={{ margin: 'auto', fontWeight: 'bold', textDecoration: 'underline' }}> {status} <br /> משפחת : {user.lname} </Card.Header>
                     <Card.Body>
                         <Card.Title> {user.backupemail} : אימייל </Card.Title>
                         <Card.Text>

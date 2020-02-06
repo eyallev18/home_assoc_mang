@@ -282,7 +282,8 @@ class TanantsNavbar extends Component {
         return (
             <div>
                 <Navbar className="hebrew" bg="primary" expand="lg">
-                    <Navbar.Brand className="navlink" href="#/">ועד בית</Navbar.Brand>
+                    <Navbar.Brand className="navlink" href="#/"> <img src="navbarpic.jpg" style={{ width: '60px', marginLeft: '10px' }} />ועד בית</Navbar.Brand>
+
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
 

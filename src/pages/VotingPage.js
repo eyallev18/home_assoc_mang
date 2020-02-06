@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './VotingPage.css'
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert, Col } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import Parse from 'parse'
 
 import TanantsNavbar from '../components/TanantsNavbar';
 import VotingModel from '../model/VotingModel'
+import VotingCard from '../components/VotingCard';
 
 class VotingPage extends Component {
     constructor(props) {
@@ -28,7 +29,7 @@ class VotingPage extends Component {
             const parseVotings = await query.find();
             const votings = parseVotings.map(parseVoting => new VotingModel(parseVoting));
             this.setState({ votings });
-            console.log(votings);
+            // console.log(votings);
             // query.find().then((parseRecipes) => {
             //     const recipes = parseRecipes.map(parseRecipe => new RecipeModel(parseRecipe));
             //     this.setState({ recipes });
@@ -40,15 +41,23 @@ class VotingPage extends Component {
 
     render() {
         const { activeUser, isCommitteeUser, handeLogout } = this.props;
+        const { votings } = this.state;
         if (!activeUser) {
             return <Redirect to="/" />
         }
+        const votesView = votings.map(voting =>
+            <Col lg={4} md={6} key={voting.id}>
+                <VotingCard voting={voting} />
+            </Col>)
+        console.log("voteview");
+        console.log(votesView);
+
 
         return (
-            <div>
+            <div className="Hebrew">
                 <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} />
                 <h1>I'm Voting Page</h1>
-
+                {votesView}
             </div>
 
 
