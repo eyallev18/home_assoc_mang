@@ -119,7 +119,8 @@ class TanantsNavbar extends Component {
             const tanantDetails2 = " שם משתמש:   " + newTanantUser.lname;
             const tanantDetails3 = "  אימייל:    " + newTanantUser.email;
             const tanantDetails4 = "   סיסמא:    " + newTanantUser.pwd;
-
+            // the function changeuser is known only in tanants and there is no reason
+            //to call it from other page
             if (window.location.hash === '#/tanants') {
                 this.props.changeuser(newParseCommittee);
             }

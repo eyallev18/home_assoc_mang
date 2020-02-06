@@ -140,7 +140,7 @@ class MessagePage extends Component {
             <Col lg={12} md={12} key={message.id}>
                 <MessageCard message={message} />
             </Col>)
-        const MessageHeader = mycommunity == null ? <h1 className="textbuild">   הודעות בנין : </h1> : <h1 className="textbuild">  הודעות בנין :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
+        const MessageHeader = mycommunity == null ? <h1 className="textbuild">   הודעות בניין : </h1> : <h1 className="textbuild">  הודעות בניין :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
 
         return (
             <div className="Hebrew">

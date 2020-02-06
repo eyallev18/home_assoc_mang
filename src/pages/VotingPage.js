@@ -19,7 +19,7 @@ class VotingPage extends Component {
             showNewVotingModal: false
 
         }
-
+        this.setVote = this.setVote.bind(this);
     }
     async componentDidMount() {
         if (this.props.activeUser) {
@@ -39,6 +39,33 @@ class VotingPage extends Component {
         }
     }
 
+    setVote(Voting) {
+        const voting = Parse.Object.extend('voting');
+        const query1 = new Parse.Query(voting);
+        console.log(query1)
+        const { activeUser } = this.props;
+        const Vote = Parse.Object.extend('Vote');
+        const myNewObject = new Vote();
+        const query = new Parse.Query(voting);
+
+        myNewObject.set('votedBy', activeUser);
+        myNewObject.set('vote', 'yes');
+        myNewObject.set('voteId', Voting.id);
+
+        myNewObject.save().then(
+            (result) => {
+
+                console.log('Vote created', result);
+            },
+            (error) => {
+
+                console.error('Error while creating Vote: ', error);
+            }
+        );
+
+
+    }
+
     render() {
         const { activeUser, isCommitteeUser, handeLogout, mycommunity } = this.props;
         const { votings } = this.state;
@@ -48,7 +75,7 @@ class VotingPage extends Component {
         const VotingHeader = mycommunity == null ? <h1 className="textbuild">   הצבעות  : </h1> : <h1 className="textbuild">  הצבעות   :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
         const votesView = votings.map(voting =>
             <Col lg={4} md={6} key={voting.id}>
-                <VotingCard voting={voting} />
+                <VotingCard voting={voting} setVote={this.setVote} />
             </Col>)
         console.log("voteview");
         console.log(votesView);

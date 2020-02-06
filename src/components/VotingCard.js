@@ -5,9 +5,18 @@ import { Card, Button } from 'react-bootstrap';
 class VotingCard extends Component {
     constructor(props) {
         super(props);
+        this.state = {
 
+            currentvote: null
+
+
+        }
+        this.handlesetVote = this.handlesetVote.bind(this);
     }
 
+    handlesetVote(voting) {
+        this.props.setVote(voting);
+    }
 
     render() {
         const { voting } = this.props;
@@ -25,7 +34,7 @@ class VotingCard extends Component {
                         <Card.Text>
 
                         </Card.Text>
-                        <Button variant="primary">הצבע</Button>
+                        <Button variant="primary" onClick={() => { this.handlesetVote(voting) }}>הצבע</Button>
                     </Card.Body>
                 </Card>
 
