@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './VotingCard.css'
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, ButtonGroup } from 'react-bootstrap';
 
 class VotingCard extends Component {
     constructor(props) {
@@ -22,6 +22,9 @@ class VotingCard extends Component {
         const { voting } = this.props;
         //const cardstyle = user.isCommitteeMember ? { width: '18rem', backgroundColor: 'hsl(207, 48%, 85%)', marginBottom: '15px' } : { width: '18rem', backgroundColor: '#e9ecef', marginBottom: '15px' };
         //const status = user.isCommitteeMember ? " ועד הבית" : "דיירים";
+        const buttonGroup = voting.options.map(oneoption =>
+            <Button variant="primary" onClick={() => { this.handlesetVote(voting) }}>{oneoption}</Button>
+        )
 
 
         return (
@@ -34,7 +37,10 @@ class VotingCard extends Component {
                         <Card.Text>
 
                         </Card.Text>
-                        <Button variant="primary" onClick={() => { this.handlesetVote(voting) }}>הצבע</Button>
+                        <ButtonGroup size="lg">
+                            {/*<Button variant="primary" onClick={() => { this.handlesetVote(voting) }}>הצבע</Button> */}
+                            {buttonGroup}
+                        </ButtonGroup>
                     </Card.Body>
                 </Card>
 

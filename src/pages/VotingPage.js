@@ -29,13 +29,7 @@ class VotingPage extends Component {
             const parseVotings = await query.find();
             const votings = parseVotings.map(parseVoting => new VotingModel(parseVoting));
             this.setState({ votings });
-            // console.log(votings);
-            // query.find().then((parseRecipes) => {
-            //     const recipes = parseRecipes.map(parseRecipe => new RecipeModel(parseRecipe));
-            //     this.setState({ recipes });
-            // }, (error) => {
-            //     console.error('Error while fetching Recipe', error);
-            // });
+
         }
     }
 
