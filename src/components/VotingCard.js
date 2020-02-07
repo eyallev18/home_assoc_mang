@@ -22,8 +22,27 @@ class VotingCard extends Component {
         const { voting } = this.props;
         //const cardstyle = user.isCommitteeMember ? { width: '18rem', backgroundColor: 'hsl(207, 48%, 85%)', marginBottom: '15px' } : { width: '18rem', backgroundColor: '#e9ecef', marginBottom: '15px' };
         //const status = user.isCommitteeMember ? " ועד הבית" : "דיירים";
-        const buttonGroup = voting.options.map(oneoption =>
-            <Button variant="primary" className="needmargin" onClick={() => { this.handlesetVote(voting, oneoption) }}>{oneoption}</Button>
+        var buttonstyle = [];
+        for (let i = 0; i < voting.options.length; i++) {
+            if (voting.options[i] === "בעד") {
+                buttonstyle.push("success")
+            } else if (voting.options[i] === "נגד") {
+                buttonstyle.push("danger")
+            }
+            else {
+                buttonstyle.push("secondary")
+            }
+        }
+
+
+        // buttonstyle = oneoption === "בעד" ? "Success" : "Danger"
+
+
+
+        const buttonGroup = voting.options.map((oneoption, i) =>
+
+            <Button variant={buttonstyle[i]} className="needmargin" onClick={() => { this.handlesetVote(voting, oneoption) }}>{oneoption}</Button>
+
         )
 
 
@@ -40,6 +59,7 @@ class VotingCard extends Component {
                         <ButtonGroup size="lg">
                             {/*<Button variant="primary" onClick={() => { this.handlesetVote(voting) }}>הצבע</Button> */}
                             {buttonGroup}
+                            <Button variant="secondary" className="needmargin" onClick={() => { this.handlesetVote(voting, "נמנע") }}>נמנע/ת</Button>
                         </ButtonGroup>
                     </Card.Body>
                 </Card>
