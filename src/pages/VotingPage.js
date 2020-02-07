@@ -33,7 +33,7 @@ class VotingPage extends Component {
         }
     }
 
-    setVote(Voting) {
+    setVote(Voting, oneoption) {
 
 
 
@@ -41,7 +41,7 @@ class VotingPage extends Component {
         // updating voting class in votes field
         const voting = Parse.Object.extend('voting');
         const query1 = new Parse.Query(voting);
-        const myVote = { "votedBy": activeUser.id, "vote": "yes" };
+        const myVote = { "votedBy": activeUser.id, "vote": oneoption };
         let allvotes = Voting.votes.push(myVote);
 
 
@@ -53,7 +53,7 @@ class VotingPage extends Component {
                 const myNewObject = new Vote();
                 const query = new Parse.Query(voting);
                 myNewObject.set('votedBy', activeUser);
-                myNewObject.set('vote', 'yes');
+                myNewObject.set('vote', oneoption);
                 myNewObject.set('voteId', object);
 
                 myNewObject.save().then(

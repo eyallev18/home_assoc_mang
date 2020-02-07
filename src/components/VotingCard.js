@@ -14,8 +14,8 @@ class VotingCard extends Component {
         this.handlesetVote = this.handlesetVote.bind(this);
     }
 
-    handlesetVote(voting) {
-        this.props.setVote(voting);
+    handlesetVote(voting, oneoption) {
+        this.props.setVote(voting, oneoption);
     }
 
     render() {
@@ -23,7 +23,7 @@ class VotingCard extends Component {
         //const cardstyle = user.isCommitteeMember ? { width: '18rem', backgroundColor: 'hsl(207, 48%, 85%)', marginBottom: '15px' } : { width: '18rem', backgroundColor: '#e9ecef', marginBottom: '15px' };
         //const status = user.isCommitteeMember ? " ועד הבית" : "דיירים";
         const buttonGroup = voting.options.map(oneoption =>
-            <Button variant="primary" onClick={() => { this.handlesetVote(voting) }}>{oneoption}</Button>
+            <Button variant="primary" className="needmargin" onClick={() => { this.handlesetVote(voting, oneoption) }}>{oneoption}</Button>
         )
 
 
