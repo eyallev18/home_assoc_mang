@@ -61,17 +61,13 @@ class HomePage extends Component {
                     </div>
                 </Carousel>
 
+                <div className="backpic">
+                    <Jumbotron>
 
-                <Jumbotron>
+                        <h1 className="textbuild">   ברוכים הבאים לניהול ועד הבית שלי </h1>
 
-                    <h1>HomePage</h1>
-                    {/*<p>
-                        Master your recipes
-                    </p>
-                    <p>
-                        <Button variant="success" href="#/login">Login</Button>
-                    </p> */}
-                </Jumbotron>
+                    </Jumbotron>
+                </div>
             </div>
         );
     }
