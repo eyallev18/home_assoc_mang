@@ -40,28 +40,41 @@ class VotingPage extends Component {
     }
 
     setVote(Voting) {
+
+
+
+        const { activeUser } = this.props;
+        // updating voting class in votes field
         const voting = Parse.Object.extend('voting');
         const query1 = new Parse.Query(voting);
-        console.log(query1)
-        const { activeUser } = this.props;
-        const Vote = Parse.Object.extend('Vote');
-        const myNewObject = new Vote();
-        const query = new Parse.Query(voting);
+        const myVote = { "votedBy": activeUser.id, "vote": "yes" };
+        let allvotes = Voting.votes.push(myVote);
 
-        myNewObject.set('votedBy', activeUser);
-        myNewObject.set('vote', 'yes');
-        myNewObject.set('voteId', Voting.id);
 
-        myNewObject.save().then(
-            (result) => {
+        query1.get(Voting.id).then((object) => {
+            object.set('votes', Voting.votes);
 
-                console.log('Vote created', result);
-            },
-            (error) => {
+            object.save().then((response) => {
+                const Vote = Parse.Object.extend('Vote');
+                const myNewObject = new Vote();
+                const query = new Parse.Query(voting);
+                myNewObject.set('votedBy', activeUser);
+                myNewObject.set('vote', 'yes');
+                myNewObject.set('voteId', object);
 
-                console.error('Error while creating Vote: ', error);
-            }
-        );
+                myNewObject.save().then(
+                    (result) => {
+                        console.log('Vote created', result);
+                    },
+                    (error) => {
+                        console.error('Error while creating Vote: ', error);
+                    }
+                );
+                console.log('Updated voting', response);
+            }, (error) => {
+                console.error('Error while updating voting', error);
+            });
+        });
 
 
     }
