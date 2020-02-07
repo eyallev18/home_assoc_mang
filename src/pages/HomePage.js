@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //import { Carousel } from 'react-responsive-carousel';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import './HomePage.css'
 const responsive = {
     superLargeDesktop: {
         // the naming can be any, depends on you.
@@ -42,7 +43,7 @@ class HomePage extends Component {
             <div style={{ width: '98%', margin: 'auto' }}>
                 <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handlelogin={this.handlelogin} handeLogout={this.handeLogout} />
                 {/* <RecipeNavbar activeUser={activeUser} handleLogout={handleLogout} />*/}
-                <Carousel customTransition="transform 300ms ease-in-out" swipeable={true} responsive={responsive} stopOnHover={false} arrows={false} showStatus={false} showIndicators={false} showDots={false} showThumbs={false} autoPlay={true} interval="5000" infinite={true} >
+                <Carousel className={"posfix"} customTransition="transform 300ms ease-in-out" swipeable={true} responsive={responsive} stopOnHover={false} arrows={false} showStatus={false} showIndicators={false} showDots={false} showThumbs={false} autoPlay={true} interval="5000" infinite={true} >
                     <div>
                         <img src="Byte2.jpg" />
                     </div>

@@ -77,7 +77,7 @@ class TanantsPage extends Component {
 
         return (
             <div>
-                <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} changeuser={this.updateUsers} />
+                <TanantsNavbar className={"posfix"} activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} changeuser={this.updateUsers} />
                 <Container>
                     <div className="users-header">
                         {TanantsHeader}
