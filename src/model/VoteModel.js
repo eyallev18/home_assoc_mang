@@ -1,8 +1,9 @@
-export default class VotingModel {
-    constructor(votingModel) {
-        this.id = votingModel.id;
-        this.votedBy = votingModel.get("votedBy");
-        this.vote = votingModel.get("vote");
+export default class VoteModel {
+    constructor(voteModel) {
+        this.id = voteModel.id;
+        this.votedBy = voteModel.get("votedBy");
+        this.vote = voteModel.get("vote");
+        this.voteId = voteModel.get("voteId");
 
     }
 }

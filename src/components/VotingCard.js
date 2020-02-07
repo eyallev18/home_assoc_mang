@@ -7,7 +7,9 @@ class VotingCard extends Component {
         super(props);
         this.state = {
 
-            currentvote: null
+            currentvote: null,
+            alreadyVote: this.props.alreadyVote
+
 
 
         }
@@ -19,7 +21,9 @@ class VotingCard extends Component {
     }
 
     render() {
-        const { voting } = this.props;
+        const { voting, myvoting } = this.props;
+        const { alreadyVote } = this.state;
+        const Ivoted = alreadyVote || this.props.alreadyVote;
         //const cardstyle = user.isCommitteeMember ? { width: '18rem', backgroundColor: 'hsl(207, 48%, 85%)', marginBottom: '15px' } : { width: '18rem', backgroundColor: '#e9ecef', marginBottom: '15px' };
         //const status = user.isCommitteeMember ? " ועד הבית" : "דיירים";
         var buttonstyle = [];
@@ -36,16 +40,25 @@ class VotingCard extends Component {
 
 
         // buttonstyle = oneoption === "בעד" ? "Success" : "Danger"
+        if (myvoting.length > 0 && !Ivoted) {
+            var found = false;
+            for (var j = 0; j < myvoting.length && !found; j++) {
+                if (myvoting[j].voteId.id === voting.id) {
+                    found = true;
+                    this.setState({
+                        alreadyVote: true
 
-
-
-        const buttonGroup = voting.options.map((oneoption, i) =>
+                    })
+                }
+            }
+        }
+        var buttonGroup = voting.options.map((oneoption, i) =>
 
             <Button variant={buttonstyle[i]} className="needmargin" onClick={() => { this.handlesetVote(voting, oneoption) }}>{oneoption}</Button>
 
         )
-
-
+        //  buttonGroup += <Button variant="secondary" className="needmargin" onClick={() => { this.handlesetVote(voting, "נמנע") }}>נמנע/ת</Button>;
+        const itemtodisplay = !Ivoted ? buttonGroup : <p> הצבעת כבר בהצבעה זו</p>
         return (
             <div className="user">
 
@@ -58,8 +71,8 @@ class VotingCard extends Component {
                         </Card.Text>
                         <ButtonGroup size="lg">
                             {/*<Button variant="primary" onClick={() => { this.handlesetVote(voting) }}>הצבע</Button> */}
-                            {buttonGroup}
-                            <Button variant="secondary" className="needmargin" onClick={() => { this.handlesetVote(voting, "נמנע") }}>נמנע/ת</Button>
+                            {itemtodisplay}
+                            {/*<Button variant="secondary" className="needmargin" onClick={() => { this.handlesetVote(voting, "נמנע") }}>נמנע/ת</Button> */}
                         </ButtonGroup>
                     </Card.Body>
                 </Card>

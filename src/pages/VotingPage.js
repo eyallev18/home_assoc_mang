@@ -6,6 +6,7 @@ import Parse from 'parse'
 
 import TanantsNavbar from '../components/TanantsNavbar';
 import VotingModel from '../model/VotingModel'
+import VoteModel from '../model/VoteModel'
 import VotingCard from '../components/VotingCard';
 
 class VotingPage extends Component {
@@ -15,8 +16,9 @@ class VotingPage extends Component {
         this.state = {
 
             votings: [],
-            myopenvoting: [],
-            showNewVotingModal: false
+            myvoting: [],
+            showNewVotingModal: false,
+            alreadyVote: false
 
         }
         this.setVote = this.setVote.bind(this);
@@ -29,15 +31,23 @@ class VotingPage extends Component {
             const parseVotings = await query.find();
             const votings = parseVotings.map(parseVoting => new VotingModel(parseVoting));
             this.setState({ votings });
+            // if ( Voting.votes.find(({ votedBy }) => votedBy === activeUser.id) == undefined)
+            const Votes = Parse.Object.extend('Vote');
+            const query1 = new Parse.Query(Votes);
+            query1.equalTo("votedBy", this.props.activeUser)
 
+            const parseVotes = await query1.find();
+            const myvoting = parseVotes.map(parseVote => new VoteModel(parseVote));
+            this.setState({ myvoting });
         }
     }
 
     setVote(Voting, oneoption) {
-
-
-
         const { activeUser } = this.props;
+        const { alreadyVote } = this.state;
+
+        //  if ( Voting.votes.find(({ votedBy }) => votedBy === activeUser.id) == undefined){
+
         // updating voting class in votes field
         const voting = Parse.Object.extend('voting');
         const query1 = new Parse.Query(voting);
@@ -65,6 +75,7 @@ class VotingPage extends Component {
                     }
                 );
                 console.log('Updated voting', response);
+                this.setState({ alreadyVote: true })
             }, (error) => {
                 console.error('Error while updating voting', error);
             });
@@ -73,16 +84,18 @@ class VotingPage extends Component {
 
     }
 
+
     render() {
         const { activeUser, isCommitteeUser, handeLogout, mycommunity } = this.props;
-        const { votings } = this.state;
+        const { votings, alreadyVote, myvoting } = this.state;
         if (!activeUser) {
             return <Redirect to="/" />
         }
+
         const VotingHeader = mycommunity == null ? <h1 className="textbuild">   הצבעות  : </h1> : <h1 className="textbuild">  הצבעות   :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
         const votesView = votings.map(voting =>
             <Col lg={4} md={6} key={voting.id}>
-                <VotingCard voting={voting} setVote={this.setVote} />
+                <VotingCard voting={voting} setVote={this.setVote} alreadyVote={alreadyVote} myvoting={myvoting} />
             </Col>)
         console.log("voteview");
         console.log(votesView);
