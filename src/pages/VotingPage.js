@@ -18,7 +18,7 @@ class VotingPage extends Component {
             votings: [],
             myvoting: [],
             showNewVotingModal: false,
-            alreadyVote: false
+            alreadyVote: []
 
         }
         this.setVote = this.setVote.bind(this);
@@ -32,7 +32,12 @@ class VotingPage extends Component {
             const query = new Parse.Query(Voting);
 
             const parseVotings = await query.find();
-            const votings = parseVotings.map(parseVoting => new VotingModel(parseVoting));
+            let votings = parseVotings.map(parseVoting => new VotingModel(parseVoting));
+            votings.sort(function (a, b) {
+                a = new Date(a.createdAt);
+                b = new Date(b.createdAt);
+                return a > b ? -1 : a < b ? 1 : 0;
+            });
             this.setState({ votings });
             // if ( Voting.votes.find(({ votedBy }) => votedBy === activeUser.id) == undefined)
             const Votes = Parse.Object.extend('Vote');
@@ -56,7 +61,7 @@ class VotingPage extends Component {
 
         myNewObject.set('createdBy', activeUser);
         myNewObject.set('title', newVoting.title);
-        myNewObject.set('details', newVoting.title);
+        myNewObject.set('details', newVoting.details);
         myNewObject.set('dueDate', newVoting.dueDate);
         myNewObject.set('votes', newVoting.votes);
         myNewObject.set('options', newVoting.options);
@@ -66,6 +71,13 @@ class VotingPage extends Component {
             (result) => {
                 //  if (typeof document !== 'undefined') document.write(`voting created: ${JSON.stringify(result)}`);
                 console.log('voting created', result);
+                this.setState({
+                    votings: this.state.votings.concat(new VotingModel(result)).sort(function (a, b) {
+                        a = new Date(a.createdAt);
+                        b = new Date(b.createdAt);
+                        return a > b ? -1 : a < b ? 1 : 0;
+                    })
+                })
             },
             (error) => {
                 //     if (typeof document !== 'undefined') document.write(`Error while creating voting: ${JSON.stringify(error)}`);
@@ -106,7 +118,9 @@ class VotingPage extends Component {
                     }
                 );
                 console.log('Updated voting', response);
-                this.setState({ alreadyVote: true })
+                this.setState({
+                    alreadyVote: alreadyVote.concat(true)
+                })
             }, (error) => {
                 console.error('Error while updating voting', error);
             });
@@ -124,9 +138,9 @@ class VotingPage extends Component {
         }
 
         const VotingHeader = mycommunity == null ? <h1 className="textbuild">   הצבעות  : </h1> : <h1 className="textbuild">  הצבעות   :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
-        const votesView = votings.map(voting =>
-            <Col lg={4} md={6} key={voting.id}>
-                <VotingCard voting={voting} setVote={this.setVote} alreadyVote={alreadyVote} myvoting={myvoting} />
+        const votesView = votings.map((voting, index) =>
+            <Col lg={6} md={6} key={voting.id}>
+                <VotingCard voting={voting} setVote={this.setVote} alreadyVote={alreadyVote[index]} myvoting={myvoting} />
             </Col>)
         console.log("voteview");
         console.log(votesView);

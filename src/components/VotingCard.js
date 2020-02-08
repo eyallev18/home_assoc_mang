@@ -59,6 +59,11 @@ class VotingCard extends Component {
         )
         //  buttonGroup += <Button variant="secondary" className="needmargin" onClick={() => { this.handlesetVote(voting, "נמנע") }}>נמנע/ת</Button>;
         const itemtodisplay = !Ivoted ? buttonGroup : <p style={{ color: 'red', fontWeight: 'bold' }}> הצבעת כבר בהצבעה זו</p>
+        var dd = String(voting.dueDate.getDate()).padStart(2, '0');
+        var mm = String(voting.dueDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = voting.dueDate.getFullYear();
+        var votEndHour = voting.dueDate.getHours();// > 12 ? voting.dueDate.getHours() - 12 : (voting.dueDate.getHours() < 10 ? "0" + voting.dueDate.getHours() : voting.dueDate.getHours());
+        var votEndDaye = mm + '/' + dd + '/' + yyyy + ' בשעה : ' + votEndHour + ':00';
         return (
             <div className="user">
 
@@ -67,7 +72,7 @@ class VotingCard extends Component {
                     <Card.Body>
                         <Card.Title>{voting.details}</Card.Title>
                         <Card.Text>
-
+                            תאריך אחרון להצבעה : {votEndDaye}
                         </Card.Text>
                         <ButtonGroup size="lg">
                             {/*<Button variant="primary" onClick={() => { this.handlesetVote(voting) }}>הצבע</Button> */}

@@ -98,6 +98,7 @@ class NewVotingModal extends Component {
                             <Col sm={{ span: 10, offset: 4 }}>
                                 <Form.Check label="בעד" type="checkbox" value="בעד" name="בעד" onChange={this.handleInputChange} />
                                 <Form.Check label="נגד" type="checkbox" value="נגד" name="נגד" onChange={this.handleInputChange} />
+                                <Form.Check label="נמנע" type="checkbox" value="נמנע" name="נמנע" onChange={this.handleInputChange} />
                             </Col>
                         </Form.Group>
 
