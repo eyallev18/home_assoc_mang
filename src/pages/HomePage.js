@@ -62,9 +62,15 @@ class HomePage extends Component {
                 </Carousel>
 
                 <div className="backpic">
-                    <Jumbotron>
 
-                        <h1 className="textbuild">   ברוכים הבאים לניהול ועד הבית שלי </h1>
+
+                    <Jumbotron>
+                        <h4 className="headerbuild">   ברוכים הבאים לניהול ועד הבית שלי </h4>
+                        <h5 className="headerbuild">     האפליקציה שתעזור לכם לחיי קהילה טובים ושכנות טובה</h5>
+                        <footer className="footerline">
+                            <h6 className="headerbuild">   נכתב ועוצב על ידי: אייל לב<br /><a href="mailto:eyal18yaffa03@gmail.com">eyal18yaffa03@gmail.com</a></h6>
+                        </footer>
+
 
                     </Jumbotron>
                 </div>

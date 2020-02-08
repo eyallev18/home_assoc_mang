@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form, Row, Col, Image } from 'react-bootstrap';
-import './NewMessageModal.css'
+import './NewVotingModal.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-class NewMessageModal extends Component {
+class NewVotingModal extends Component {
     constructor(props) {
         super(props);
 
@@ -15,7 +15,8 @@ class NewMessageModal extends Component {
             details: "",
             dueDate: new Date(),
             votes: [],
-            options: []
+            options: [],
+            comments: ""
 
         }
 
@@ -39,11 +40,16 @@ class NewMessageModal extends Component {
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
 
-        this.setState({
-            [name]: value
-        });
+        if (target.type == "checkbox") {
+            this.setState({
+                options: this.state.options.concat(target.name)
+            });
+        } else {
+            this.setState({
+                [name]: value
+            });
+        }
     }
-
     createVoting() {
         const { createdBy, createdAt, title, details, dueDate, votes, options } = this.state;
         const newVoting = { createdBy, title, details, dueDate, votes, options };
@@ -53,14 +59,15 @@ class NewMessageModal extends Component {
             createdBy: "",
             title: "",
             details: "",
-            dueDate: date,
+            dueDate: new Date(),
             votes: [],
-            options: []
+            options: [],
+            comments: ""
         })
     }
     render() {
         const { show, handleClose } = this.props;
-        const { createdBy, createdAt, title, details, dueDate, votes, options } = this.state;
+        const { createdBy, createdAt, title, details, dueDate, votes, options, comments } = this.state;
         return (
             <Modal className="align_right" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -88,15 +95,16 @@ class NewMessageModal extends Component {
                             <Form.Control as="textarea" rows="3" name="comments" value={comments} onChange={this.handleInputChange} />
                         </Form.Group>
                         <Form.Group as={Row} controlId="formHorizontalCheck">
-                            <Col sm={{ span: 10, offset: 2 }}>
-                                <Form.Check label="Remember me" />
-                                <Form.Check label="Remember me" />
+                            <Col sm={{ span: 10, offset: 4 }}>
+                                <Form.Check label="בעד" type="checkbox" value="בעד" name="בעד" onChange={this.handleInputChange} />
+                                <Form.Check label="נגד" type="checkbox" value="נגד" name="נגד" onChange={this.handleInputChange} />
                             </Col>
                         </Form.Group>
 
-
-                        <DatePicker selected={this.state.startDate} onChange={this.handleChange} />
-
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                            <Form.Label>תאריך סיום הצבעה</Form.Label>
+                            <DatePicker selected={this.state.dueDate} onChange={this.handleChange} showTimeSelect dateFormat="Pp" />
+                        </Form.Group>
                     </Form>
 
 
@@ -108,7 +116,7 @@ class NewMessageModal extends Component {
                     <Button variant="secondary" onClick={handleClose}>
                         בטל
                 </Button>
-                    <Button variant="primary" onClick={this.createMessage}>
+                    <Button variant="primary" onClick={this.createVoting}>
                         צור הצבעה
                 </Button>
                 </Modal.Footer>

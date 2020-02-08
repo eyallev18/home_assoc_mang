@@ -58,7 +58,7 @@ class VotingCard extends Component {
 
         )
         //  buttonGroup += <Button variant="secondary" className="needmargin" onClick={() => { this.handlesetVote(voting, "נמנע") }}>נמנע/ת</Button>;
-        const itemtodisplay = !Ivoted ? buttonGroup : <p style={{ color: 'red', backgroundColor: 'yellow', fontWeight: 'bold' }}> הצבעת כבר בהצבעה זו</p>
+        const itemtodisplay = !Ivoted ? buttonGroup : <p style={{ color: 'red', fontWeight: 'bold' }}> הצבעת כבר בהצבעה זו</p>
         return (
             <div className="user">
 

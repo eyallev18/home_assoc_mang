@@ -3,7 +3,7 @@ import './VotingPage.css'
 import { Form, Button, Alert, Col } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import Parse from 'parse'
-
+import NewVotingModal from '../components/NewVotingModal';
 import TanantsNavbar from '../components/TanantsNavbar';
 import VotingModel from '../model/VotingModel'
 import VoteModel from '../model/VoteModel'
@@ -22,6 +22,9 @@ class VotingPage extends Component {
 
         }
         this.setVote = this.setVote.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleNewVoting = this.handleNewVoting.bind(this);
+
     }
     async componentDidMount() {
         if (this.props.activeUser) {
@@ -41,7 +44,35 @@ class VotingPage extends Component {
             this.setState({ myvoting });
         }
     }
+    handleClose() {
+        this.setState({
+            showNewVotingModal: false
+        })
+    }
+    handleNewVoting(newVoting) {
+        const { activeUser, isCommitteeUser, handeLogout } = this.props;
+        const voting = Parse.Object.extend('voting');
+        const myNewObject = new voting();
 
+        myNewObject.set('createdBy', activeUser);
+        myNewObject.set('title', newVoting.title);
+        myNewObject.set('details', newVoting.title);
+        myNewObject.set('dueDate', newVoting.dueDate);
+        myNewObject.set('votes', newVoting.votes);
+        myNewObject.set('options', newVoting.options);
+
+
+        myNewObject.save().then(
+            (result) => {
+                //  if (typeof document !== 'undefined') document.write(`voting created: ${JSON.stringify(result)}`);
+                console.log('voting created', result);
+            },
+            (error) => {
+                //     if (typeof document !== 'undefined') document.write(`Error while creating voting: ${JSON.stringify(error)}`);
+                console.error('Error while creating voting: ', error);
+            }
+        );
+    }
     setVote(Voting, oneoption) {
         const { activeUser } = this.props;
         const { alreadyVote } = this.state;
@@ -87,7 +118,7 @@ class VotingPage extends Component {
 
     render() {
         const { activeUser, isCommitteeUser, handeLogout, mycommunity } = this.props;
-        const { votings, alreadyVote, myvoting } = this.state;
+        const { votings, alreadyVote, myvoting, showNewVotingModal } = this.state;
         if (!activeUser) {
             return <Redirect to="/" />
         }
@@ -99,13 +130,18 @@ class VotingPage extends Component {
             </Col>)
         console.log("voteview");
         console.log(votesView);
+        const votingButton = isCommitteeUser ? (<Button className="createb" onClick={() => { this.setState({ showNewVotingModal: true }) }}>צור הצבעה חדשה</Button>) : (<Button className="createb" disabled onClick={() => { this.setState({ showNewVotingModal: true }) }}>צור הצבעה חדשה</Button>)
+
 
 
         return (
             <div className="Hebrew">
                 <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} />
                 {VotingHeader}
+                {votingButton}
                 {votesView}
+
+                <NewVotingModal activeUser={activeUser} isCommitteeUser={isCommitteeUser} show={showNewVotingModal} handleClose={this.handleClose} handleNewVoting={this.handleNewVoting} />
             </div>
 
 

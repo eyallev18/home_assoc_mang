@@ -1,10 +1,30 @@
 .dropdown-menu {
-    background-color: cadetblue;
+    background-color: #dee2e6;
 }
-.backpic >img {
-    pointer-events: none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+.backpic {
+    background-color:white
+    
+}
+
+.headerbuild {
+    margin: auto;
+    width:50%;
+    margin-bottom: 50px!important;
+    margin-top: 50px;
+    text-align: center;
+    font-weight: 900;
+    color: darkgreen;
+    
+}
+.footerline {
+    position:relative;
+    top: 120px;
+    margin-bottom:5%;
+    color: darkgreen;
+}
+.headerbuild > a{
+    color: darkgreen;
+}
+.jumbotron{
+    padding-top: 0px!important;
 }
