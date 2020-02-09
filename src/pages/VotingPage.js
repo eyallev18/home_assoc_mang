@@ -113,15 +113,14 @@ class VotingPage extends Component {
                 myNewObject.save().then(
                     (result) => {
                         console.log('Vote created', result);
+                        this.setState({ myvoting: this.state.myvoting.concat(new VoteModel(result)) });
                     },
                     (error) => {
                         console.error('Error while creating Vote: ', error);
                     }
                 );
                 console.log('Updated voting', response);
-                this.setState({
-                    alreadyVote: alreadyVote.concat(true)
-                })
+
             }, (error) => {
                 console.error('Error while updating voting', error);
             });
