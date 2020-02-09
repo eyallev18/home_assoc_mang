@@ -9,6 +9,7 @@ import Parse from 'parse'
 import TanantsModel from '../model/TanantsModel'
 import SignUpModal from '../components/SignUpModal';
 import translate from 'translate';
+import emailjs from 'emailjs-com';
 
 
 
@@ -114,6 +115,20 @@ class TanantsNavbar extends Component {
             });
             console.log('User signed up', newParseCommittee);
             console.log(newParseCommittee.id)
+            var template_params = {
+                "vaad": this.props.activeUser.attributes.username,
+                "user_email": newTanantUser.email,
+                "newTanantUserName": newTanantUser.lname,
+                "apartment": newTanantUser.apartment,
+                "password": newTanantUser.pwd
+                // "recipe_name": newRecipe.name,
+                //"user_name": this.props.activeUser.lname,
+                //"recipe_url": "http://localhost:3000/#/recipes"
+            }
+
+            var service_id = "default_service";
+            var template_id = "new_tanant";
+            emailjs.send(service_id, template_id, template_params);
 
             const tanantDetails1 = " העבר לדייר: ";
             const tanantDetails2 = " שם משתמש:   " + newTanantUser.lname;

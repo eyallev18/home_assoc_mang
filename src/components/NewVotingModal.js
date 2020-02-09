@@ -90,10 +90,10 @@ class NewVotingModal extends Component {
 
 
 
-                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                        {/* <Form.Group controlId="exampleForm.ControlTextarea1">
                             <Form.Label>הערות</Form.Label>
                             <Form.Control as="textarea" rows="3" name="comments" value={comments} onChange={this.handleInputChange} />
-                        </Form.Group>
+                        </Form.Group> */}
                         <Form.Group as={Row} controlId="formHorizontalCheck">
                             <Col sm={{ span: 10, offset: 4 }}>
                                 <Form.Check label="בעד" type="checkbox" value="בעד" name="בעד" onChange={this.handleInputChange} />
