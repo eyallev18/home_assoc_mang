@@ -68,6 +68,24 @@ class TanantsPage extends Component {
         if (!activeUser) {
             return <Redirect to="/" />
         }
+        var objToday = new Date(),
+
+            curHour = objToday.getHours();
+        let welcome = <h1></h1>;
+        if (curHour > 4 && curHour < 11) {
+            welcome = <h1 className="textbuild"> בוקר טוב :{activeUser.attributes.username}    </h1>
+        } else if (curHour > 11 && curHour < 16) {
+            welcome = <h1 className="textbuild"> צהריים טובים :{activeUser.attributes.username}    </h1>
+        } else if (curHour > 16 && curHour < 18) {
+            welcome = <h1 className="textbuild"> אחר הצהריים טובים : {activeUser.attributes.username}    </h1>
+
+        } else if (curHour > 18 && curHour < 21) {
+            welcome = <h1 className="textbuild"> ערב טוב : {activeUser.attributes.username}    </h1>
+
+        } else {
+            welcome = <h1 className="textbuild"> לילה טוב :{activeUser.attributes.username}    </h1>
+
+        }
 
         const usersView = users.map(user =>
             <Col lg={4} md={6} key={user.id}>
@@ -80,7 +98,9 @@ class TanantsPage extends Component {
                 <TanantsNavbar className={"posfix"} activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} changeuser={this.updateUsers} />
                 <Container>
                     <div className="users-header">
+
                         {TanantsHeader}
+                        {welcome}
 
                     </div>
                     <Row className="padding">

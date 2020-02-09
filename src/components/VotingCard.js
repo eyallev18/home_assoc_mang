@@ -20,6 +20,7 @@ class VotingCard extends Component {
         this.props.setVote(voting, oneoption);
     }
 
+
     render() {
         const { voting, myvoting } = this.props;
         const { alreadyVote } = this.state;
@@ -57,13 +58,37 @@ class VotingCard extends Component {
             <Button variant={buttonstyle[i]} className="needmargin" onClick={() => { this.handlesetVote(voting, oneoption) }}>{oneoption}</Button>
 
         )
+        var buttonGroupdisabled = voting.options.map((oneoption, i) =>
+
+            <Button variant={buttonstyle[i]} className="needmargin" disabled onClick={() => { this.handlesetVote(voting, oneoption) }}>{oneoption}</Button>
+
+        )
         //  buttonGroup += <Button variant="secondary" className="needmargin" onClick={() => { this.handlesetVote(voting, "נמנע") }}>נמנע/ת</Button>;
-        const itemtodisplay = !Ivoted ? buttonGroup : <p style={{ color: 'red', fontWeight: 'bold' }}> הצבעת כבר בהצבעה זו</p>
+        var d = new Date();
+        var votEnded = d.getTime() > voting.dueDate.getTime();
+        let peregrapg = <p></p>;
+
+
+
+        // var itemtodisplay = !Ivoted || ? buttonGroup : <p style={{ color: 'red', fontWeight: 'bold' }}> הצבעת כבר בהצבעה זו</p>
+        var itemtodisplay = buttonGroup;
+        if (Ivoted && !votEnded) {
+            itemtodisplay = <p style={{ color: 'red', fontWeight: 'bold' }}> הצבעת כבר בהצבעה זו</p>
+
+        } else if (!Ivoted && votEnded) {
+            itemtodisplay = <p style={{ color: 'red', fontWeight: 'bold' }}> לא הצבעת  בהצבעה זו <br /> ותאריך סוף הצבעה עבר</p>
+        } else if (Ivoted && votEnded) {
+            itemtodisplay = <p style={{ color: 'red', fontWeight: 'bold' }}> הצבעת כבר בהצבעה זו <br /> ותאריך סוף הצבעה עבר</p>
+        }
+
+
+        const itemtodisplay1 = Ivoted || votEnded ? buttonGroupdisabled : null
         var dd = String(voting.dueDate.getDate()).padStart(2, '0');
         var mm = String(voting.dueDate.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = voting.dueDate.getFullYear();
         var votEndHour = voting.dueDate.getHours();// > 12 ? voting.dueDate.getHours() - 12 : (voting.dueDate.getHours() < 10 ? "0" + voting.dueDate.getHours() : voting.dueDate.getHours());
         var votEndDaye = mm + '/' + dd + '/' + yyyy + ' בשעה : ' + votEndHour + ':00';
+
         return (
             <div className="user">
 
@@ -77,6 +102,7 @@ class VotingCard extends Component {
                         <ButtonGroup size="lg">
                             {/*<Button variant="primary" onClick={() => { this.handlesetVote(voting) }}>הצבע</Button> */}
                             {itemtodisplay}
+                            {itemtodisplay1}
                             {/*<Button variant="secondary" className="needmargin" onClick={() => { this.handlesetVote(voting, "נמנע") }}>נמנע/ת</Button> */}
                         </ButtonGroup>
                     </Card.Body>
