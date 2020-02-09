@@ -8,6 +8,7 @@ import TanantsNavbar from '../components/TanantsNavbar';
 import VotingModel from '../model/VotingModel'
 import VoteModel from '../model/VoteModel'
 import VotingCard from '../components/VotingCard';
+import { Pie } from 'react-chartjs-2';
 
 class VotingPage extends Component {
     constructor(props) {
@@ -129,19 +130,80 @@ class VotingPage extends Component {
 
     }
 
+    getChartData(voting) {
+        let votingsData = [0, 0, 0];
+
+
+
+
+        for (var j = 0; j < voting.votes.length; j++) {
+            if (voting.votes[j].vote === 'בעד') {
+                ++votingsData[0];
+            } else if (voting.votes[j].vote === 'נגד') {
+                ++votingsData[1];
+            } else {
+                ++votingsData[2];
+            }
+        }
+
+
+
+        return {
+            labels: [
+                'בעד',
+                'נגד',
+                'נמנעים',
+            ],
+            datasets: [{
+                data: votingsData,
+                backgroundColor: [
+                    'green',
+                    'red',
+                    'gray'
+                ],
+
+                hoverBackgroundColor: [
+                    'green',
+                    'red',
+                    'gray']
+            }]
+        };
+
+    }
+
+
 
     render() {
         const { activeUser, isCommitteeUser, handeLogout, mycommunity } = this.props;
         const { votings, alreadyVote, myvoting, showNewVotingModal } = this.state;
+        var chartData = [];
+        for (let i = 0; i < votings.length; i++) {
+            chartData.push(this.getChartData(votings[i]));
+            //chartData = votings.length > 0 ? this.getChartData(votings) : null;
+
+        }
+
         if (!activeUser) {
             return <Redirect to="/" />
         }
 
         const VotingHeader = mycommunity == null ? <h1 className="textbuild">   הצבעות  : </h1> : <h1 className="textbuild">  הצבעות   :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
-        const votesView = votings.map((voting, index) =>
-            <Col lg={6} md={6} key={voting.id}>
-                <VotingCard voting={voting} setVote={this.setVote} alreadyVote={alreadyVote[index]} myvoting={myvoting} />
-            </Col>)
+        const votesView = votings.length > 0 ? votings.map((voting, index) =>
+            <Col lg={12} md={12} key={voting.id}>
+                <div className="container d-flex center users-header ">
+                    <div className="rightitem">
+                        <VotingCard voting={voting} setVote={this.setVote} alreadyVote={alreadyVote[index]} myvoting={myvoting} />
+                    </div>
+                    <div className="rightitem">
+                        <Pie data={chartData[index]} />
+                    </div>
+                </div>
+            </Col>) : votings.map((voting, index) =>
+                <Col lg={6} md={6} key={voting.id}>
+                    <div className="container flex center">
+                        <VotingCard voting={voting} setVote={this.setVote} alreadyVote={alreadyVote[index]} myvoting={myvoting} />
+                    </div>
+                </Col>)
         console.log("voteview");
         console.log(votesView);
         const votingButton = isCommitteeUser ? (<Button className="createb" onClick={() => { this.setState({ showNewVotingModal: true }) }}>צור הצבעה חדשה</Button>) : (<Button className="createb" disabled onClick={() => { this.setState({ showNewVotingModal: true }) }}>צור הצבעה חדשה</Button>)
