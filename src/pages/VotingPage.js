@@ -31,7 +31,7 @@ class VotingPage extends Component {
         if (this.props.activeUser) {
             const Voting = Parse.Object.extend('voting');
             const query = new Parse.Query(Voting);
-
+            query.equalTo("community", this.props.activeUser.attributes.community);
             const parseVotings = await query.find();
             let votings = parseVotings.map(parseVoting => new VotingModel(parseVoting));
             votings.sort(function (a, b) {
@@ -61,6 +61,7 @@ class VotingPage extends Component {
         const myNewObject = new voting();
 
         myNewObject.set('createdBy', activeUser);
+        myNewObject.set('community', activeUser.attributes.community);
         myNewObject.set('title', newVoting.title);
         myNewObject.set('details', newVoting.details);
         myNewObject.set('dueDate', newVoting.dueDate);
@@ -207,11 +208,12 @@ class VotingPage extends Component {
         console.log(votesView);
         const votingButton = isCommitteeUser ? (<Button className="createb" onClick={() => { this.setState({ showNewVotingModal: true }) }}>צור הצבעה חדשה</Button>) : (<Button className="createb" disabled onClick={() => { this.setState({ showNewVotingModal: true }) }}>צור הצבעה חדשה</Button>)
 
-
+        const navbarHideShow = window.location.hash === "#/dashboard" ? null : <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} />
 
         return (
             <div className="Hebrew">
-                <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} />
+                {/*<TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} /> */}
+                {navbarHideShow}
                 {VotingHeader}
                 {votingButton}
                 {votesView}

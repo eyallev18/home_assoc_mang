@@ -3,6 +3,7 @@ export default class VotingModel {
         this.id = votingModel.id;
         this.createdBy = votingModel.get("createdBy");
         this.createdAt = votingModel.get("createdAt");
+        this.community = votingModel.get("community");
         this.title = votingModel.get("title");
         this.details = votingModel.get("details");
         this.dueDate = votingModel.get("dueDate");

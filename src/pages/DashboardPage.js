@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import './DashBoard.css'
-//import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert, Col } from 'react-bootstrap';
 //import { Link, Redirect } from 'react-router-dom';
 import Parse from 'parse'
 import TanantsNavbar from '../components/TanantsNavbar';
+import TanantsPage from './TanantsPage';
+import MessagesPage from './MessagesPage';
+import VotingPage from './VotingPage';
+
 import { Redirect } from 'react-router-dom';
 
 class DashBoard extends Component {
@@ -14,7 +18,7 @@ class DashBoard extends Component {
 
 
     render() {
-        const { activeUser, committeeUser, handeLogout } = this.props;
+        const { activeUser, committeeUser, handeLogout, mycommunity, isCommitteeUser } = this.props;
         if (!activeUser) {
             return <Redirect to="/" />
         }
@@ -24,7 +28,20 @@ class DashBoard extends Component {
         return (
             <div>
                 <TanantsNavbar activeUser={activeUser} committeeUser={committeeUser} handeLogout={handeLogout} />
-                <h1>I'm DashBoard Page</h1>
+
+                <div className="mycontainer" >
+
+                    <div className="rightitem scroolbar" >
+                        <VotingPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} mycommunity={mycommunity} />
+
+                    </div>
+                    <div className="rightitem scroolbar">
+                        <MessagesPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} mycommunity={mycommunity} />
+
+
+                    </div>
+
+                </div>
 
             </div>
 

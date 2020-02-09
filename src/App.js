@@ -68,7 +68,7 @@ class App extends React.Component {
           <LoginPage handleLogin={this.handleLogin} isCommitteeUser={isCommitteeUser} />
         </Route>
         <Route exact path="/dashboard">
-          <DashboardPage activeUser={activeUser} handeLogout={this.handeLogout} />
+          <DashboardPage activeUser={activeUser} handeLogout={this.handeLogout} mycommunity={mycommunity} isCommitteeUser={isCommitteeUser} handleGetCommunity={this.handleGetCommunity} />
         </Route>
         <Route exact path="/tanants">
           <TanantsPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} handeLogout={this.handeLogout} handleGetCommunity={this.handleGetCommunity} mycommunity={mycommunity} />

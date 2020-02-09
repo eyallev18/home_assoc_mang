@@ -92,10 +92,10 @@ class TanantsPage extends Component {
                 <TanantsCard user={user} />
             </Col>)
         const TanantsHeader = mycommunity == null ? <h1 className="textbuild">    </h1> : <h1 className="textbuild">      {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
-
+        const navbarHideShow = window.location.hash === "#/dashboard" ? null : <TanantsNavbar className={"posfix"} activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} changeuser={this.updateUsers} />
         return (
             <div>
-                <TanantsNavbar className={"posfix"} activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} changeuser={this.updateUsers} />
+                {navbarHideShow}
                 <Container>
                     <div className="users-header">
 

@@ -141,10 +141,11 @@ class MessagePage extends Component {
                 <MessageCard message={message} />
             </Col>)
         const MessageHeader = mycommunity == null ? <h1 className="textbuild">   הודעות בניין : </h1> : <h1 className="textbuild">  הודעות בניין :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
-
+        const navbarHideShow = window.location.hash === "#/dashboard" ? null : <TanantsNavbar className={"posfix"} activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} changeuser={this.updateUsers} />
         return (
             <div className="Hebrew">
-                <TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} changeuser={this.updateUsers} />
+                {/*<TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} changeuser={this.updateUsers} /> */}
+                {navbarHideShow}
                 {MessageHeader}
 
 
