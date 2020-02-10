@@ -2,6 +2,7 @@
   "name": "home_assoc_mang",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://eyallev18.github.io/home_assoc_mang",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
