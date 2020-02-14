@@ -41,9 +41,17 @@ class NewVotingModal extends Component {
         const name = target.name;
 
         if (target.type == "checkbox") {
-            this.setState({
-                options: this.state.options.concat(target.name)
-            });
+            if (!this.state.options.includes(target.name)) {
+                this.setState({
+                    options: this.state.options.concat(target.name)
+                });
+            } else {
+                for (let i = 0; i < this.state.options.length; i++) {
+                    if (this.state.options[i] === target.name) {
+                        this.state.options.splice(i, 1);
+                    }
+                }
+            }
         } else {
             this.setState({
                 [name]: value

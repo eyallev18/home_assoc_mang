@@ -47,17 +47,9 @@ class TanantsPage extends Component {
             const myCommunity = new CommunityModel(parseCommunity[0]);
             // const parsourcommunity = parseCommunity.map(parseCommunity => { new CommunityModel(parseCommunity); });
 
-            console.log(myCommunity);
-
             this.props.handleGetCommunity(myCommunity);
 
-            //this.props.changeuser(parseUsers);
-            // query.find().then((parseRecipes) => {
-            //     const recipes = parseRecipes.map(parseRecipe => new RecipeModel(parseRecipe));
-            //     this.setState({ recipes });
-            // }, (error) => {
-            //     console.error('Error while fetching Recipe', error);
-            // });
+
         }
     }
 

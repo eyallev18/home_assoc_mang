@@ -20,10 +20,11 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      activeUser: null,
+      activeUser: Parse.User.current(),
       committeeUser: null,
-      isCommitteeUser: false,
-      mycommunity: null
+      isCommitteeUser: Parse.User.current() != null ? Parse.User.current().attributes.isCommitteeMember : null,
+      mycommunity: null,
+      //Parse.User.current() != null ? Parse.User.current().attributes.community.attributes : null
 
     }
     //this.handeLogout = this.handeLogout.bind(this);
@@ -74,13 +75,13 @@ class App extends React.Component {
           <TanantsPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} handeLogout={this.handeLogout} handleGetCommunity={this.handleGetCommunity} mycommunity={mycommunity} />
         </Route>
         <Route exact path="/messages">
-          <MessagesPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} mycommunity={mycommunity} />
+          <MessagesPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} handleGetCommunity={this.handleGetCommunity} mycommunity={mycommunity} />
         </Route>
         <Route exact path="/issues">
           <IssuesPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} />
         </Route>
         <Route exact path="/voting">
-          <VotingPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} mycommunity={mycommunity} />
+          <VotingPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} handleGetCommunity={this.handleGetCommunity} mycommunity={mycommunity} handleGetCommunity={this.handleGetCommunity} />
         </Route>
 
 

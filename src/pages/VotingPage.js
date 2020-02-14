@@ -6,6 +6,8 @@ import Parse from 'parse'
 import NewVotingModal from '../components/NewVotingModal';
 import TanantsNavbar from '../components/TanantsNavbar';
 import VotingModel from '../model/VotingModel'
+import TanantsModel from '../model/TanantsModel'
+import CommunityModel from '../model/CommunityModel'
 import VoteModel from '../model/VoteModel'
 import VotingCard from '../components/VotingCard';
 import { Pie } from 'react-chartjs-2';
@@ -29,6 +31,34 @@ class VotingPage extends Component {
     }
     async componentDidMount() {
         if (this.props.activeUser) {
+
+            const User = Parse.Object.extend('User');
+            const queryU = new Parse.Query(User);
+            queryU.equalTo("community", this.props.activeUser.attributes.community);
+
+            const parseUsers = await queryU.find();
+            //           const users1 = parseUsers.map(parseUser => { new TanantsModel(parseUser); this.updateUsers(parseUser); });
+            const ourcomm = queryU._where.community.objectId;
+
+            const Community = Parse.Object.extend('Community');
+            const queryC = new Parse.Query(Community)
+            queryC.equalTo("objectId", ourcomm)
+            const parseCommunity = await queryC.find();
+
+            const myCommunity = new CommunityModel(parseCommunity[0]);
+            // const parsourcommunity = parseCommunity.map(parseCommunity => { new CommunityModel(parseCommunity); });
+
+            this.props.handleGetCommunity(myCommunity);
+
+
+
+
+
+
+
+
+
+
             const Voting = Parse.Object.extend('voting');
             const query = new Parse.Query(Voting);
             query.equalTo("community", this.props.activeUser.attributes.community);

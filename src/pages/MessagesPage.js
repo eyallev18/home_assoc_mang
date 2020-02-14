@@ -8,6 +8,7 @@ import TanantsNavbar from '../components/TanantsNavbar';
 import MessageModel from '../model/MessageModel'
 import NewMessageModal from '../components/NewMessageModal';
 import MessageCard from '../components/MessageCard';
+import CommunityModel from '../model/CommunityModel'
 import Collapse from "../components/Collapse";
 import { Pie } from 'react-chartjs-2';
 
@@ -30,6 +31,24 @@ class MessagePage extends Component {
     }
     async componentDidMount() {
         if (this.props.activeUser) {
+            const User = Parse.Object.extend('User');
+            const queryU = new Parse.Query(User);
+            queryU.equalTo("community", this.props.activeUser.attributes.community);
+
+            const parseUsers = await queryU.find();
+            //           const users1 = parseUsers.map(parseUser => { new TanantsModel(parseUser); this.updateUsers(parseUser); });
+            const ourcomm = queryU._where.community.objectId;
+
+            const Community = Parse.Object.extend('Community');
+            const queryC = new Parse.Query(Community)
+            queryC.equalTo("objectId", ourcomm)
+            const parseCommunity = await queryC.find();
+
+            const myCommunity = new CommunityModel(parseCommunity[0]);
+            // const parsourcommunity = parseCommunity.map(parseCommunity => { new CommunityModel(parseCommunity); });
+
+            this.props.handleGetCommunity(myCommunity);
+
             const Message = Parse.Object.extend('message');
             const query = new Parse.Query(Message);
             query.equalTo("community", this.props.activeUser.attributes.community);

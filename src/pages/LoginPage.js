@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './LoginPage.css'
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert, Row } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import Parse from 'parse'
 
@@ -111,8 +111,8 @@ class LoginPage extends Component {
 
                     {errorAlert}
                     <Form>
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label>שם הדייר</Form.Label>
+                        <Form.Group as={Row} controlId="formBasicEmail">
+                            <Form.Label column sm="6">שם הדייר</Form.Label>
                             <Form.Control name="lname" value={lname}
                                 type="text" placeholder="הכנס שם משפחה" onChange={this.handleInputChange} />
                         </Form.Group>
@@ -122,8 +122,8 @@ class LoginPage extends Component {
                                 type="email" placeholder="הכנס כתובת אימייל" onChange={this.handleInputChange} />
                         </Form.Group> */}
 
-                        <Form.Group controlId="formBasicPassword1">
-                            <Form.Label>סיסמא</Form.Label>
+                        <Form.Group as={Row} controlId="formBasicPassword1">
+                            <Form.Label column sm="6">סיסמא</Form.Label>
                             <Form.Control name="pwd" value={pwd}
                                 type="password" placeholder="סיסמא" onChange={this.handleInputChange} />
                         </Form.Group>
