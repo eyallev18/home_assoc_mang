@@ -159,13 +159,14 @@ class MessagePage extends Component {
             <Col lg={12} md={12} key={message.id}>
                 <MessageCard message={message} />
             </Col>)
-        const MessageHeader = mycommunity == null ? <h1 className="textbuild">   הודעות בניין : </h1> : <h1 className="textbuild">  הודעות בניין :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
+        const MessageHeader = mycommunity == null ? <h1 className="textbuild">   הודעות  : </h1> : <h1 className="textbuild">  הודעות  :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
         const navbarHideShow = window.location.hash === "#/dashboard" ? null : <TanantsNavbar className={"posfix"} activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} changeuser={this.updateUsers} />
+        const MessageHeadershowHide = window.location.hash === "#/dashboard" ? null : MessageHeader
         return (
             <div className="Hebrew">
                 {/*<TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} changeuser={this.updateUsers} /> */}
                 {navbarHideShow}
-                {MessageHeader}
+                {MessageHeadershowHide}
 
 
                 <Button className="createb" onClick={() => { this.setState({ showNewMessageModal: true }) }}>צור הודעה חדשה</Button>

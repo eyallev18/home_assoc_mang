@@ -1,4 +1,8 @@
 .mycontainer{
     display:flex;
     align-items: flex-start;
+    
+}
+.scroolbar{
+    overflow: auto;
 }

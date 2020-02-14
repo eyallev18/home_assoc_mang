@@ -18,12 +18,12 @@ class DashBoard extends Component {
 
 
     render() {
-        const { activeUser, committeeUser, handeLogout, mycommunity, isCommitteeUser } = this.props;
+        const { activeUser, committeeUser, handeLogout, mycommunity, isCommitteeUser, handleGetCommunity } = this.props;
         if (!activeUser) {
             return <Redirect to="/" />
         }
 
-
+        const DashBoardHeader = mycommunity == null ? <h1 className="textbuild">   תצוגות  : </h1> : <h1 className="textbuild">  תצוגות   :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
 
         return (
 
@@ -40,26 +40,28 @@ class DashBoard extends Component {
             //   </Container>
             <div>
                 <TanantsNavbar activeUser={activeUser} committeeUser={committeeUser} handeLogout={handeLogout} />
-                <Container>
-                    <Row className="justify-content-md-center">
-                        {/*   <div className="mycontainer" >  */}
-                        <Col xs lg="4" md="4">
-                            {/* <div className="rightitem scroolbar" > */}
-                            <VotingPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} mycommunity={mycommunity} />
+                {/*<Container>*/}
+                {DashBoardHeader}
+                <Row className="justify-content-md-center">
+                    {/* <div className="mycontainer" > */}
 
-                            {/*     </div> */}
-                        </Col>
-                        <Col xs lg="4" md="4">
-                            {/*   <div className="rightitem scroolbar"> */}
-                            <MessagesPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} mycommunity={mycommunity} />
+                    <Col xs lg="7" md="12">
+                        <div className="rightitem scroolbar" >
+                            <VotingPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} mycommunity={mycommunity} handleGetCommunity={handleGetCommunity} />
+
+                        </div>
+                    </Col>
+                    <Col xs lg="5" md="12">
+                        <div className="rightitem scroolbar">
+                            <MessagesPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} mycommunity={mycommunity} handleGetCommunity={handleGetCommunity} />
 
 
-                            {/*   </div> */}
-                        </Col>
+                        </div>
+                    </Col>
 
-                        {/*  </div> */}
-                    </Row>
-                </Container>
+                    {/*   </div> */}
+                </Row>
+                {/*  </Container> */}
             </div>
 
 

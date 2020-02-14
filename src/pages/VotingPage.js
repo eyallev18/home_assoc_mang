@@ -218,6 +218,7 @@ class VotingPage extends Component {
         }
 
         const VotingHeader = mycommunity == null ? <h1 className="textbuild">   הצבעות  : </h1> : <h1 className="textbuild">  הצבעות   :     {mycommunity.street}  {mycommunity.bulding} {mycommunity.City}  </h1>
+        const VotingHeaderHideShow = window.location.hash === "#/dashboard" ? null : VotingHeader
         const votesView = votings.length > 0 ? votings.map((voting, index) =>
             <Col lg={12} md={12} key={voting.id}>
                 <div className="container d-flex center users-header ">
@@ -244,7 +245,7 @@ class VotingPage extends Component {
             <div className="Hebrew">
                 {/*<TanantsNavbar activeUser={activeUser} isCommitteeUser={isCommitteeUser} handeLogout={handeLogout} /> */}
                 {navbarHideShow}
-                {VotingHeader}
+                {VotingHeaderHideShow}
                 {votingButton}
                 {votesView}
 

@@ -81,7 +81,7 @@ class App extends React.Component {
           <IssuesPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} />
         </Route>
         <Route exact path="/voting">
-          <VotingPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} handleGetCommunity={this.handleGetCommunity} mycommunity={mycommunity} handleGetCommunity={this.handleGetCommunity} />
+          <VotingPage activeUser={activeUser} handeLogout={this.handeLogout} isCommitteeUser={isCommitteeUser} handleGetCommunity={this.handleGetCommunity} mycommunity={mycommunity} />
         </Route>
 
 
