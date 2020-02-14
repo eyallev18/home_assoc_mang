@@ -230,7 +230,7 @@ class VotingPage extends Component {
                     </div>
                 </div>
             </Col>) : votings.map((voting, index) =>
-                <Col lg={6} md={6} key={voting.id}>
+                <Col lg={12} md={12} key={voting.id}>
                     <div className="container flex center">
                         <VotingCard voting={voting} setVote={this.setVote} alreadyVote={alreadyVote[index]} myvoting={myvoting} />
                     </div>
