@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/home_assoc_mang/static/css/main.aad17776.chunk.css",
-    "main.js": "/home_assoc_mang/static/js/main.027fcbc9.chunk.js",
-    "main.js.map": "/home_assoc_mang/static/js/main.027fcbc9.chunk.js.map",
+    "main.css": "/home_assoc_mang/static/css/main.2b544dd1.chunk.css",
+    "main.js": "/home_assoc_mang/static/js/main.9c9bc6da.chunk.js",
+    "main.js.map": "/home_assoc_mang/static/js/main.9c9bc6da.chunk.js.map",
     "runtime-main.js": "/home_assoc_mang/static/js/runtime-main.a5ae0343.js",
     "runtime-main.js.map": "/home_assoc_mang/static/js/runtime-main.a5ae0343.js.map",
     "static/css/2.0564a1bf.chunk.css": "/home_assoc_mang/static/css/2.0564a1bf.chunk.css",
-    "static/js/2.11f14447.chunk.js": "/home_assoc_mang/static/js/2.11f14447.chunk.js",
-    "static/js/2.11f14447.chunk.js.map": "/home_assoc_mang/static/js/2.11f14447.chunk.js.map",
+    "static/js/2.7dbcfbf1.chunk.js": "/home_assoc_mang/static/js/2.7dbcfbf1.chunk.js",
+    "static/js/2.7dbcfbf1.chunk.js.map": "/home_assoc_mang/static/js/2.7dbcfbf1.chunk.js.map",
     "index.html": "/home_assoc_mang/index.html",
-    "precache-manifest.eb33c5c432d71a98c8cfa81df71bec1d.js": "/home_assoc_mang/precache-manifest.eb33c5c432d71a98c8cfa81df71bec1d.js",
+    "precache-manifest.958169ab86380a400a59fb09b81192d1.js": "/home_assoc_mang/precache-manifest.958169ab86380a400a59fb09b81192d1.js",
     "service-worker.js": "/home_assoc_mang/service-worker.js",
     "static/css/2.0564a1bf.chunk.css.map": "/home_assoc_mang/static/css/2.0564a1bf.chunk.css.map",
-    "static/css/main.aad17776.chunk.css.map": "/home_assoc_mang/static/css/main.aad17776.chunk.css.map",
-    "static/js/2.11f14447.chunk.js.LICENSE": "/home_assoc_mang/static/js/2.11f14447.chunk.js.LICENSE",
+    "static/css/main.2b544dd1.chunk.css.map": "/home_assoc_mang/static/css/main.2b544dd1.chunk.css.map",
+    "static/js/2.7dbcfbf1.chunk.js.LICENSE": "/home_assoc_mang/static/js/2.7dbcfbf1.chunk.js.LICENSE",
     "static/media/logo.svg": "/home_assoc_mang/static/media/logo.5d5d9eef.svg",
     "static/media/styles.css": "/home_assoc_mang/static/media/revicons.2feb69cc.eot"
   },
   "entrypoints": [
     "static/js/runtime-main.a5ae0343.js",
     "static/css/2.0564a1bf.chunk.css",
-    "static/js/2.11f14447.chunk.js",
-    "static/css/main.aad17776.chunk.css",
-    "static/js/main.027fcbc9.chunk.js"
+    "static/js/2.7dbcfbf1.chunk.js",
+    "static/css/main.2b544dd1.chunk.css",
+    "static/js/main.9c9bc6da.chunk.js"
   ]
 }
